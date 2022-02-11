@@ -1,0 +1,16 @@
+{
+  "name": "creativestyle/magesuite-notification-dashboard",
+  "description": "Notification Dashboard",
+  "type": "magento2-module",
+  "homepage": "https://creativestyle.de",
+  "license": "OSL-3.0",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "MageSuite\\NotificationDashboard\\": ""
+    }
+  }
+}
+
