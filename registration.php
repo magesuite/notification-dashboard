@@ -5,4 +5,3 @@
     'MageSuite_NotificationDashboard',
     __DIR__
 );
-
