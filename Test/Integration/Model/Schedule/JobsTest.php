@@ -25,6 +25,5 @@ class JobsTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(2, $jobs);
         $this->assertEquals('30 */4 * * *', $jobs[0]['cron_expression']);
         $this->assertEquals('0 * * * *', $jobs[1]['cron_expression']);
-
     }
 }

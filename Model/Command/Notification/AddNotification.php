@@ -20,7 +20,7 @@ class AddNotification
         $this->notificationProcessor = $notificationProcessor;
     }
 
-    public function execute($message, $collectorId, $severity, $title = null)
+    public function execute($message, $collectorId, $severity, $title = null) //phpcs:ignore
     {
         if (!$title) {
             $title = __('Notification');

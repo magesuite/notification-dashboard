@@ -75,7 +75,7 @@ class NotificationRepository implements \MageSuite\NotificationDashboard\Api\Not
     public function markAsRead($ids)
     {
         try {
-            foreach($this->getNotificationsByIds($ids) as $notification) {
+            foreach ($this->getNotificationsByIds($ids) as $notification) {
                 $notification->setIsRead(true);
                 $this->save($notification);
             }
@@ -104,7 +104,7 @@ class NotificationRepository implements \MageSuite\NotificationDashboard\Api\Not
     public function deleteByIds($ids)
     {
         try {
-            foreach($this->getNotificationsByIds($ids) as $notification) {
+            foreach ($this->getNotificationsByIds($ids) as $notification) {
                 $this->resourceModel->delete($notification);
             }
 

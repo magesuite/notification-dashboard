@@ -2,5 +2,5 @@
 <?php $viewAllUrl = $block->getViewAllUrl(); ?>
 
 <?php if ($viewAllUrl) : ?>
-    <span style="float: right;"><a href="<?= $viewAllUrl; ?>"><?= __('View all'); ?></a></span>
+    <span style="float: right;"><a href="<?= /* @noEscape */ $viewAllUrl; ?>"><?= /* @noEscape */ __('View all'); ?></a></span>
 <?php endif; ?>
