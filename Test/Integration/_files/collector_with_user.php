@@ -33,6 +33,6 @@ $collectorUser->isObjectNew(true);
 $collectorUser
     ->setCollectorId($collector->getId())
     ->setUserId($user->getId())
-    ->setEmail(true);
+    ->setEmail(false);
 
 $collectorUserRepository->save($collectorUser);
