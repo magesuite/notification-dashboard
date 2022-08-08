@@ -18,7 +18,7 @@ class Delete extends \Magento\Backend\App\Action implements \Magento\Framework\A
     public function execute()
     {
         $resultRedirect = $this->resultRedirectFactory->create();
-        $backUrl = $this->getRequest()->getParam('back_url', '*/*/*');
+        $backUrl = $this->getRequest()->getParam('back_url', '*/*/index');
 
         $id = (int) $this->getRequest()->getParam('id');
 
