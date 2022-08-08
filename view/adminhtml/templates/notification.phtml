@@ -1,0 +1,6 @@
+<?php /** @var \MageSuite\NotificationDashboard\Block\Adminhtml\Notification $block */ ?>
+<?php $viewAllUrl = $block->getViewAllUrl(); ?>
+
+<?php if ($viewAllUrl) : ?>
+    <span style="float: right;"><a href="<?= $viewAllUrl; ?>"><?= __('View all'); ?></a></span>
+<?php endif; ?>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">notification_listing.notification_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>notification_columns</spinner>
+        <deps>
+            <dep>notification_listing.notification_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="notification_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+            <filterUrlParams>
+                <param name="collector_id">*</param>
+            </filterUrlParams>
+        </settings>
+        <aclResource>MageSuite_NotificationDashboard::notification_dashboard</aclResource>
+        <dataProvider class="\MageSuite\NotificationDashboard\Ui\DataProvider\Listing\Notification" name="notification_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                </item>
+            </argument>
+            <action name="mark_as_read">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">markAsRead</item>
+                        <item name="label" xsi:type="string" translate="true">Mark as Read</item>
+                        <item name="url" xsi:type="url" path="notification_dashboard/notification/massAction_markAsRead"/>
+                    </item>
+                </argument>
+            </action>
+            <action name="delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">delete</item>
+                        <item name="label" xsi:type="string" translate="true">Delete</item>
+                        <item name="url" xsi:type="url" path="notification_dashboard/notification/massAction_delete"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="notification_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="collector_id" class="MageSuite\NotificationDashboard\Ui\Component\Listing\Notification\CollectorName" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MageSuite\NotificationDashboard\Model\Source\Collector</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Collector Name</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </column>
+        <column name="title" class="MageSuite\NotificationDashboard\Ui\Component\Listing\Notification\UnReadEntry" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="label" xsi:type="string" translate="true">Title</item>
+                </item>
+            </argument>
+        </column>
+        <column name="message" class="MageSuite\NotificationDashboard\Ui\Component\Listing\Notification\UnReadEntry" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="label" xsi:type="string" translate="true">Message</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+        <column name="severity" class="MageSuite\NotificationDashboard\Ui\Component\Listing\Severity">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MageSuite\NotificationDashboard\Model\Source\Severity</item>
+                <item name="config" xsi:type="array">
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="label" xsi:type="string" translate="true">Severity</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date" sortOrder="50">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="is_read" class="MageSuite\NotificationDashboard\Ui\Component\Listing\Notification\IsMarkedAsRead" sortOrder="60">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">MageSuite\NotificationDashboard\Model\Source\IsMarkedAsRead</item>
+                <item name="config" xsi:type="array">
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="label" xsi:type="string" translate="true">Is Marked As Read</item>
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </column>
+        <actionsColumn name="actions" class="MageSuite\NotificationDashboard\Ui\Component\Listing\Notification\Actions" sortOrder="100">
+            <settings>
+                <indexField>id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

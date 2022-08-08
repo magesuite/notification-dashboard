@@ -1,0 +1,16 @@
+<!--@subject {{trans "%title" title=$title}} @-->
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <strong class="greeting">{{trans "Good morning"}}</strong>
+            <p>{{trans "It's a notification from %store_name" store_name=$store.frontend_name}}</p>
+        </td>
+    </tr>
+
+    <tr class="email-information">
+        <td>
+            <p>{{trans '%message' message=$message}}</p>
+        </td>
+    </tr>
+</table>

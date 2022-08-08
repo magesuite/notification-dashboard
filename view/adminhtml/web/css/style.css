@@ -1,0 +1,3 @@
+.admin__menu .item-dashboard.level-2 > a:before {
+    content: '';
+}
