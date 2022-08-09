@@ -30,12 +30,10 @@ class MarkAsRead extends \Magento\Backend\App\Action implements \Magento\Framewo
         try {
             $this->notificationRepository->markAsRead([$id]);
             $this->messageManager->addSuccess(__('You marked notification as read.'));
-
-            return $resultRedirect->setPath($backUrl);
         } catch (\Exception $e) {
             $this->messageManager->addError($e->getMessage());
-
-            return $resultRedirect->setPath($backUrl);
         }
+
+        return $resultRedirect->setPath($backUrl);
     }
 }

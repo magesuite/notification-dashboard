@@ -30,10 +30,10 @@ class Delete extends \Magento\Backend\App\Action implements \Magento\Framework\A
         try {
             $this->notificationRepository->deleteById($id);
             $this->messageManager->addSuccess(__('You deleted the notification.'));
-            return $resultRedirect->setPath($backUrl);
         } catch (\Exception $e) {
             $this->messageManager->addError($e->getMessage());
-            return $resultRedirect->setPath($backUrl);
         }
+
+        return $resultRedirect->setPath($backUrl);
     }
 }
