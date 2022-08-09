@@ -2,7 +2,7 @@
 
 namespace MageSuite\NotificationDashboard\Service;
 
-class Processor implements ProcessorInterface
+abstract class Processor implements ProcessorInterface
 {
     protected \Magento\Framework\Serialize\SerializerInterface $serializer;
 
