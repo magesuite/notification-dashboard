@@ -26,7 +26,7 @@ class FieldsetVisibility extends \Magento\Ui\Component\Form\Fieldset implements 
 
         $currentEntity = $this->getCurrentEntity();
 
-        if (!$currentEntity->getIsStatic()) {
+        if (!$currentEntity || !$currentEntity->getIsStatic()) {
             return $config;
         }
 
@@ -41,6 +41,10 @@ class FieldsetVisibility extends \Magento\Ui\Component\Form\Fieldset implements 
         }
 
         $currentEntity = $this->getCurrentEntity();
+
+        if ($currentEntity === null) {
+            return false;
+        }
 
         if (!$currentEntity instanceof \MageSuite\NotificationDashboard\Model\Data\Collector) {
             return true;
