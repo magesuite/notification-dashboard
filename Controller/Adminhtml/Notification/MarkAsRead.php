@@ -22,21 +22,20 @@ class MarkAsRead extends \Magento\Backend\App\Action implements \Magento\Framewo
 
         $id = (int) $this->getRequest()->getParam('id');
 
-        if ($id) {
-            try {
-                $this->notificationRepository->markAsRead([$id]);
-                $this->messageManager->addSuccess(__('You marked notification as read.'));
-
-                return $resultRedirect->setPath($backUrl);
-            } catch (\Exception $e) {
-                $this->messageManager->addError($e->getMessage());
-
-                return $resultRedirect->setPath($backUrl);
-            }
+        if (!$id) {
+            $this->messageManager->addError(__('We can\'t find a notification to mark.'));
+            return $resultRedirect->setPath($backUrl);
         }
 
-        $this->messageManager->addError(__('We can\'t find a notification to mark.'));
+        try {
+            $this->notificationRepository->markAsRead([$id]);
+            $this->messageManager->addSuccess(__('You marked notification as read.'));
 
-        return $resultRedirect->setPath($backUrl);
+            return $resultRedirect->setPath($backUrl);
+        } catch (\Exception $e) {
+            $this->messageManager->addError($e->getMessage());
+
+            return $resultRedirect->setPath($backUrl);
+        }
     }
 }

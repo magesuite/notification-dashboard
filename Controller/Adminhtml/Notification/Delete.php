@@ -22,21 +22,18 @@ class Delete extends \Magento\Backend\App\Action implements \Magento\Framework\A
 
         $id = (int) $this->getRequest()->getParam('id');
 
-        if ($id) {
-            try {
-                $this->notificationRepository->deleteById($id);
-                $this->messageManager->addSuccess(__('You deleted the notification.'));
-
-                return $resultRedirect->setPath($backUrl);
-            } catch (\Exception $e) {
-                $this->messageManager->addError($e->getMessage());
-
-                return $resultRedirect->setPath($backUrl);
-            }
+        if (!$id) {
+            $this->messageManager->addError(__('We can\'t find a notification to delete.'));
+            return $resultRedirect->setPath($backUrl);
         }
 
-        $this->messageManager->addError(__('We can\'t find a notification to delete.'));
-
-        return $resultRedirect->setPath($backUrl);
+        try {
+            $this->notificationRepository->deleteById($id);
+            $this->messageManager->addSuccess(__('You deleted the notification.'));
+            return $resultRedirect->setPath($backUrl);
+        } catch (\Exception $e) {
+            $this->messageManager->addError($e->getMessage());
+            return $resultRedirect->setPath($backUrl);
+        }
     }
 }

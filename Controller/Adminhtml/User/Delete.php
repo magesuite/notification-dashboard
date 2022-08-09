@@ -20,21 +20,20 @@ class Delete extends \Magento\Backend\App\Action implements \Magento\Framework\A
         $resultRedirect = $this->resultRedirectFactory->create();
         $id = (int) $this->getRequest()->getParam('id');
 
-        if ($id) {
-            try {
-                $this->userRepository->deleteById($id);
-                $this->messageManager->addSuccess(__('You deleted the user.'));
-
-                return $resultRedirect->setPath('*/*/index');
-            } catch (\Exception $e) {
-                $this->messageManager->addError($e->getMessage());
-
-                return $resultRedirect->setPath('*/*/edit', ['id' => $id]);
-            }
+        if (!$id) {
+            $this->messageManager->addError(__('We can\'t find a user to delete.'));
+            return $resultRedirect->setPath('*/*/index');
         }
 
-        $this->messageManager->addError(__('We can\'t find a user to delete.'));
+        try {
+            $this->userRepository->deleteById($id);
+            $this->messageManager->addSuccess(__('You deleted the user.'));
 
-        return $resultRedirect->setPath('*/*/index');
+            return $resultRedirect->setPath('*/*/index');
+        } catch (\Exception $e) {
+            $this->messageManager->addError($e->getMessage());
+
+            return $resultRedirect->setPath('*/*/edit', ['id' => $id]);
+        }
     }
 }

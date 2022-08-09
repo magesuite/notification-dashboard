@@ -1,7 +1,7 @@
 <?php
 namespace MageSuite\NotificationDashboard\Block\Adminhtml;
 
-class Button implements \Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface
+class Button
 {
     protected \Magento\Framework\App\RequestInterface $request;
 
@@ -17,11 +17,6 @@ class Button implements \Magento\Framework\View\Element\UiComponent\Control\Butt
         $this->request = $request;
         $this->registry = $registry;
         $this->urlBuilder = $urlBuilder;
-    }
-
-    public function getButtonData()
-    {
-        return [];
     }
 
     protected function isStatic()

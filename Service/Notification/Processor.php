@@ -54,6 +54,8 @@ class Processor
 
                 $channelProcessor->execute($notification, $channelItems);
             }
+
+            $this->addNotificationToLogs($notification);
         }
     }
 
@@ -71,5 +73,19 @@ class Processor
             $this->collectorRepository->getByIds($collectorIds),
             $this->notificationChannelResolver->getChannelDataByCollectorIds($collectorIds),
         ];
+    }
+
+    protected function addNotificationToLogs($notification)
+    {
+        $message = $notification->getMessage();
+        $severity = $notification->getSeverity();
+
+        if ($severity == \MageSuite\NotificationDashboard\Model\Source\Severity::SEVERITY_NOTICE) {
+            $this->logger->info($message);
+        } elseif ($severity == \MageSuite\NotificationDashboard\Model\Source\Severity::SEVERITY_CRITICAL) {
+            $this->logger->critical($message);
+        } else {
+            $this->logger->error($message);
+        }
     }
 }

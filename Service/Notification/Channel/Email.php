@@ -14,20 +14,16 @@ class Email
 
     protected \MageSuite\NotificationDashboard\Helper\Configuration $configuration;
 
-    protected \MageSuite\NotificationDashboard\Logger\Logger $logger;
-
     public function __construct(
         \MageSuite\NotificationDashboard\Model\Command\Notification\AddRawDataToMessage $addRawDataToMessage,
         \Magento\Framework\Translate\Inline\StateInterface $inlineTranslation,
         \Magento\Framework\Mail\Template\TransportBuilderFactory $transportBuilderFactory,
-        \MageSuite\NotificationDashboard\Helper\Configuration $configuration,
-        \MageSuite\NotificationDashboard\Logger\Logger $logger
+        \MageSuite\NotificationDashboard\Helper\Configuration $configuration
     ) {
         $this->addRawDataToMessage = $addRawDataToMessage;
         $this->inlineTranslation = $inlineTranslation;
         $this->transportBuilderFactory = $transportBuilderFactory;
         $this->configuration = $configuration;
-        $this->logger = $logger;
     }
 
     public function execute($notification, $emails)
@@ -51,7 +47,5 @@ class Email
 
         $transport->getTransport()->sendMessage();
         $this->inlineTranslation->resume();
-
-        $this->logger->error($message);
     }
 }

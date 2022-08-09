@@ -2,6 +2,10 @@
 
 namespace MageSuite\NotificationDashboard\Test\Integration\Ui\Component\Form;
 
+/**
+ * @magentoDbIsolation enabled
+ * @magentoAppIsolation enabled
+ */
 class FieldsetVisibilityTest extends \PHPUnit\Framework\TestCase
 {
     protected ?\MageSuite\NotificationDashboard\Model\CollectorRepository $collectorRepository;
@@ -26,8 +30,6 @@ class FieldsetVisibilityTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @magentoAppIsolation enabled
-     * @magentoDbIsolation enabled
      * @magentoDataFixture MageSuite_NotificationDashboard::Test/Integration/_files/collector.php
      * @magentoDataFixture MageSuite_NotificationDashboard::Test/Integration/_files/user.php
      */
@@ -51,8 +53,6 @@ class FieldsetVisibilityTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @magentoAppIsolation enabled
-     * @magentoDbIsolation enabled
      * @magentoDataFixture MageSuite_NotificationDashboard::Test/Integration/_files/collector.php
      * @magentoDataFixture MageSuite_NotificationDashboard::Test/Integration/_files/user.php
      */
@@ -78,8 +78,6 @@ class FieldsetVisibilityTest extends \PHPUnit\Framework\TestCase
         } elseif ($type == 'collector') {
             $list = $this->collectorRepository->getList($searchCriteria);
         }
-
-        $items = $list->getItems();
 
         if ($this->registry->registry('current_entity')) {
             $this->registry->unregister('current_entity');
