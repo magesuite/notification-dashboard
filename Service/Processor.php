@@ -19,11 +19,7 @@ class Processor implements ProcessorInterface
         $this->addNotification = $addNotification;
     }
 
-    public function execute()
-    {
-        //This class/method should be extended/adjusted for a specific implementation
-        return true;
-    }
+    abstract public function execute();
 
     public function setCollector($collector)
     {
