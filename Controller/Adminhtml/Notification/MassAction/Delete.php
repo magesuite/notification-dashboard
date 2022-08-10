@@ -32,7 +32,13 @@ class Delete extends \Magento\Backend\App\Action implements \Magento\Framework\A
 
         $notifications = $this->filter->getCollection($this->collectionFactory->create());
 
-        $this->notificationRepository->deletebyIds($notifications->getAllIds());
+        try {
+            $this->notificationRepository->deletebyIds($notifications->getAllIds());
+            $this->messageManager->addSuccess(__('You deleted the notifications.'));
+        } catch (\Exception $e) {
+            $this->messageManager->addError($e->getMessage());
+        }
+
         return $resultRedirect;
     }
 }

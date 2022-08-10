@@ -117,7 +117,7 @@ class NotificationRepository implements \MageSuite\NotificationDashboard\Api\Not
     protected function getNotificationsByIds($ids)
     {
         $searchCriteria = $this->searchCriteriaBuilder
-            ->addFilter(\MageSuite\NotificationDashboard\Api\Data\NotificationInterface::ID, $ids)
+            ->addFilter(\MageSuite\NotificationDashboard\Api\Data\NotificationInterface::ID, $ids, 'in')
             ->create();
 
         $notificationList = $this->getList($searchCriteria);

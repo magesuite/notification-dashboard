@@ -32,7 +32,13 @@ class MarkAsRead extends \Magento\Backend\App\Action implements \Magento\Framewo
 
         $notifications = $this->filter->getCollection($this->collectionFactory->create());
 
-        $this->notificationRepository->markAsRead($notifications->getAllIds());
+        try {
+            $this->notificationRepository->markAsRead($notifications->getAllIds());
+            $this->messageManager->addSuccess(__('You marked notifications as read.'));
+        } catch (\Exception $e) {
+            $this->messageManager->addError($e->getMessage());
+        }
+
         return $resultRedirect;
     }
 }
