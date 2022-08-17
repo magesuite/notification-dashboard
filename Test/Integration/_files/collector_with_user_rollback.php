@@ -6,19 +6,11 @@ $collectorRepository = $objectManager->create(\MageSuite\NotificationDashboard\M
 $users = $userRepository->getList();
 
 foreach ($users->getItems() as $user) {
-    try {
-        $userRepository->delete($user);
-    } catch (\Exception $e) {
-        // Already removed
-    }
+    $userRepository->delete($user);
 }
 
 $collectors = $collectorRepository->getList();
 
 foreach ($collectors->getItems() as $collector) {
-    try {
-        $collectorRepository->delete($collector);
-    } catch (\Exception $e) {
-        // Already removed
-    }
+    $collectorRepository->delete($collector);
 }

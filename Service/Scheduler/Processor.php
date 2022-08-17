@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Service\Scheduler;
 
 class Processor

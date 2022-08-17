@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Model;
 
 class CollectorRepository implements \MageSuite\NotificationDashboard\Api\CollectorRepositoryInterface
@@ -31,6 +32,9 @@ class CollectorRepository implements \MageSuite\NotificationDashboard\Api\Collec
         $this->collectionProcessor = $collectionProcessor;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function save($collector)
     {
         try {
@@ -42,6 +46,9 @@ class CollectorRepository implements \MageSuite\NotificationDashboard\Api\Collec
         return $collector;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getById($id)
     {
         $collector = $this->collectorFactory->create();
@@ -54,6 +61,9 @@ class CollectorRepository implements \MageSuite\NotificationDashboard\Api\Collec
         return $collector;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getByIds($ids)
     {
         $searchCriteria = $this->searchCriteriaBuilder
@@ -69,6 +79,9 @@ class CollectorRepository implements \MageSuite\NotificationDashboard\Api\Collec
         return $list->getItems();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getCollectorsVisibleOnDashboard()
     {
         $searchCriteria = $this->searchCriteriaBuilder
@@ -84,6 +97,9 @@ class CollectorRepository implements \MageSuite\NotificationDashboard\Api\Collec
         return $list->getItems();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria = null)
     {
         $collection = $this->collectionFactory->create();
@@ -102,6 +118,9 @@ class CollectorRepository implements \MageSuite\NotificationDashboard\Api\Collec
         return $searchResults;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function delete($collector)
     {
         try {
@@ -112,6 +131,9 @@ class CollectorRepository implements \MageSuite\NotificationDashboard\Api\Collec
         return true;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function deleteById($id)
     {
         return $this->delete($this->getById($id));

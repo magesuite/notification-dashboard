@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Model\ResourceModel;
 
 class User extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb

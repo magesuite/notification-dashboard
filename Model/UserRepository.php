@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Model;
 
 class UserRepository implements \MageSuite\NotificationDashboard\Api\UserRepositoryInterface
@@ -31,6 +32,9 @@ class UserRepository implements \MageSuite\NotificationDashboard\Api\UserReposit
         $this->collectionProcessor = $collectionProcessor;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function save($user)
     {
         try {
@@ -42,6 +46,9 @@ class UserRepository implements \MageSuite\NotificationDashboard\Api\UserReposit
         return $user;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getById($id)
     {
         $user = $this->userFactory->create();
@@ -54,6 +61,9 @@ class UserRepository implements \MageSuite\NotificationDashboard\Api\UserReposit
         return $user;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria = null)
     {
         $collection = $this->collectionFactory->create();
@@ -72,6 +82,9 @@ class UserRepository implements \MageSuite\NotificationDashboard\Api\UserReposit
         return $searchResults;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function delete($user)
     {
         try {
@@ -82,6 +95,9 @@ class UserRepository implements \MageSuite\NotificationDashboard\Api\UserReposit
         return true;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function deleteById($id)
     {
         return $this->delete($this->getById($id));

@@ -17,11 +17,7 @@ class VisibleOnDashboard extends \Magento\Ui\Component\Listing\Columns\Column
                 continue;
             }
 
-            if ($item[$fieldName]) {
-                $item[$fieldName] = __('Yes');
-            } else {
-                $item[$fieldName] = __('No');
-            }
+            $item[$fieldName] = $item[$fieldName] ? __('Yes') : __('No');
         }
 
         return $dataSource;

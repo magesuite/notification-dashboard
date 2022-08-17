@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Model\Source\Collector;
 
 class Type implements \Magento\Framework\Data\OptionSourceInterface

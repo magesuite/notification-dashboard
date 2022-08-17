@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Api;
 
 /**
@@ -26,6 +27,11 @@ interface CollectorRepositoryInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function getByIds($ids);
+
+    /**
+     * @return \MageSuite\NotificationDashboard\Model\Data\Collector[]
+     */
+    public function getCollectorsVisibleOnDashboard();
 
     /**
      * @param \Magento\Framework\Api\SearchCriteriaInterface|null $searchCriteria

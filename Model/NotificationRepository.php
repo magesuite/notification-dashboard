@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Model;
 
 class NotificationRepository implements \MageSuite\NotificationDashboard\Api\NotificationRepositoryInterface
@@ -31,6 +32,9 @@ class NotificationRepository implements \MageSuite\NotificationDashboard\Api\Not
         $this->collectionProcessor = $collectionProcessor;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function save($notification)
     {
         try {
@@ -42,6 +46,9 @@ class NotificationRepository implements \MageSuite\NotificationDashboard\Api\Not
         return $notification;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getById($id)
     {
         $notification = $this->notificationFactory->create();
@@ -54,6 +61,9 @@ class NotificationRepository implements \MageSuite\NotificationDashboard\Api\Not
         return $notification;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria = null)
     {
         $collection = $this->collectionFactory->create();
@@ -72,6 +82,9 @@ class NotificationRepository implements \MageSuite\NotificationDashboard\Api\Not
         return $searchResults;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function markAsRead($ids)
     {
         try {
@@ -86,6 +99,9 @@ class NotificationRepository implements \MageSuite\NotificationDashboard\Api\Not
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function delete($notification)
     {
         try {
@@ -96,11 +112,17 @@ class NotificationRepository implements \MageSuite\NotificationDashboard\Api\Not
         return true;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function deleteById($id)
     {
         return $this->delete($this->getById($id));
     }
 
+    /**
+     * @inheritDoc
+     */
     public function deleteByIds($ids)
     {
         try {

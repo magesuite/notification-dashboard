@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Ui\DataProvider\Listing;
 
 class Notification extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider

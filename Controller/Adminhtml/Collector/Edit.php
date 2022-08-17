@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Controller\Adminhtml\Collector;
 
 class Edit extends \Magento\Backend\App\Action implements \Magento\Framework\App\Action\HttpGetActionInterface

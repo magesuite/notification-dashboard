@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Block\Adminhtml\User\Edit;
 
 class SaveButton extends \MageSuite\NotificationDashboard\Block\Adminhtml\Button implements \Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface

@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Service\Notification;
 
 class Processor
@@ -9,7 +10,7 @@ class Processor
 
     protected \MageSuite\NotificationDashboard\Model\CollectorUserRepository $collectorUserRepository;
 
-    protected \MageSuite\NotificationDashboard\Service\Notification\Channel\Admin $adminChannel;
+    protected \MageSuite\NotificationDashboard\Service\Notification\Channel\AddAdminNotification $addAdminNotification;
 
     protected \MageSuite\NotificationDashboard\Service\Notification\Channel\Resolver $notificationChannelResolver;
 
@@ -19,14 +20,14 @@ class Processor
         \MageSuite\NotificationDashboard\Model\CollectorRepository $collectorRepository,
         \MageSuite\NotificationDashboard\Model\UserRepository $userRepository,
         \MageSuite\NotificationDashboard\Model\CollectorUserRepository $collectorUserRepository,
-        \MageSuite\NotificationDashboard\Service\Notification\Channel\Admin $adminChannel,
+        \MageSuite\NotificationDashboard\Service\Notification\Channel\AddAdminNotification $addAdminNotification,
         \MageSuite\NotificationDashboard\Service\Notification\Channel\Resolver $notificationChannelResolver,
         \MageSuite\NotificationDashboard\Logger\Logger $logger
     ) {
         $this->collectorRepository = $collectorRepository;
         $this->userRepository = $userRepository;
         $this->collectorUserRepository = $collectorUserRepository;
-        $this->adminChannel = $adminChannel;
+        $this->addAdminNotification = $addAdminNotification;
         $this->notificationChannelResolver = $notificationChannelResolver;
         $this->logger = $logger;
     }
@@ -42,7 +43,7 @@ class Processor
             $collector = $collectors[$collectorId];
 
             if ($collector->getAddAdminNotification()) {
-                $this->adminChannel->execute($notification);
+                $this->addAdminNotification->execute($notification);
             }
 
             foreach ($notificationChannels as $channelName => $channelProcessor) {

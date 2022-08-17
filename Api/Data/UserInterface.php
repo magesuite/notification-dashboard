@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Api\Data;
 
 interface UserInterface

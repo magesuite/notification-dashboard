@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Ui\DataProvider\Form;
 
 class Collector extends \Magento\Ui\DataProvider\AbstractDataProvider
@@ -6,9 +7,9 @@ class Collector extends \Magento\Ui\DataProvider\AbstractDataProvider
     protected ?array $loadedData = null;
 
     /**
-     * @var \MageSuite\NotificationDashboard\Model\ResourceModel\Collector\Collection
+     * @var \MageSuite\NotificationDashboard\Model\ResourceModel\Collector\CollectionFactory
      */
-    protected $collection;
+    protected $collectionFactory;
 
     protected \Magento\Framework\Serialize\SerializerInterface $serializer;
 
@@ -29,7 +30,7 @@ class Collector extends \Magento\Ui\DataProvider\AbstractDataProvider
     ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
 
-        $this->collection = $collectionFactory->create();
+        $this->collectionFactory = $collectionFactory;
         $this->serializer = $serializer;
         $this->dataPersistor = $dataPersistor;
         $this->collectorUserRepository = $collectorUserRepository;
@@ -46,7 +47,8 @@ class Collector extends \Magento\Ui\DataProvider\AbstractDataProvider
             return $this->loadedData;
         }
 
-        $items = $this->collection->getItems();
+        $collection = $this->collectionFactory->create();
+        $items = $collection->getItems();
 
         foreach ($items as $collector) {
             $loadedData = [
@@ -65,7 +67,7 @@ class Collector extends \Magento\Ui\DataProvider\AbstractDataProvider
         $data = $this->dataPersistor->get('notification_dashboard_collector');
 
         if (!empty($data)) {
-            $collector = $this->collection->getNewEmptyItem();
+            $collector = $collection->getNewEmptyItem();
             $collector->setData($data);
             $this->loadedData[$collector->getId()] = $collector->getData();
             $this->dataPersistor->clear('notification_dashboard_collector');

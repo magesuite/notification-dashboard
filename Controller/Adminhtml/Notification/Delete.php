@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Controller\Adminhtml\Notification;
 
 class Delete extends \Magento\Backend\App\Action implements \Magento\Framework\App\Action\HttpPostActionInterface, \Magento\Framework\App\Action\HttpGetActionInterface

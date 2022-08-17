@@ -5,9 +5,5 @@ $userRepository = $objectManager->create(\MageSuite\NotificationDashboard\Model\
 $users = $userRepository->getList();
 
 foreach ($users->getItems() as $user) {
-    try {
-        $userRepository->delete($user);
-    } catch (\Exception $e) {
-        // Already removed
-    }
+    $userRepository->delete($user);
 }

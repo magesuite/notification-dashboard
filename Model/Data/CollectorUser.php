@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Model\Data;
 
 class CollectorUser extends \Magento\Framework\Model\AbstractModel
@@ -6,7 +7,7 @@ class CollectorUser extends \Magento\Framework\Model\AbstractModel
     const ID = 'id';
     const COLLECTOR_ID = 'collector_id';
     const USER_ID = 'user_id';
-    const EMAIL = 'email';
+    const SEND_EMAIL = 'send_email';
 
     const CACHE_TAG = 'notification_dashboard_notification';
     const EVENT_PREFIX = 'notification_dashboard_notification';
@@ -34,9 +35,9 @@ class CollectorUser extends \Magento\Framework\Model\AbstractModel
         return $this->getData(self::USER_ID);
     }
 
-    public function getEmail()
+    public function getSendEmail()
     {
-        return $this->getData(self::EMAIL);
+        return $this->getData(self::SEND_EMAIL);
     }
 
     public function setId($id)
@@ -57,9 +58,9 @@ class CollectorUser extends \Magento\Framework\Model\AbstractModel
         return $this;
     }
 
-    public function setEmail($email)
+    public function setSendEmail($sendEmail)
     {
-        $this->setData(self::EMAIL, $email);
+        $this->setData(self::SEND_EMAIL, $sendEmail);
         return $this;
     }
 }

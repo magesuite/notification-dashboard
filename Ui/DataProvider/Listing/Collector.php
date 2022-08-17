@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Ui\DataProvider\Listing;
 
 class Collector extends \Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider

@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Block\Adminhtml;
 
 class Button

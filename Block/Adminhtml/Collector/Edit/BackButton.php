@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Block\Adminhtml\Collector\Edit;
 
 class BackButton extends \MageSuite\NotificationDashboard\Block\Adminhtml\Button implements \Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface

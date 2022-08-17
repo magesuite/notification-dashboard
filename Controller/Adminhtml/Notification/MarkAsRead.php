@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Controller\Adminhtml\Notification;
 
 class MarkAsRead extends \Magento\Backend\App\Action implements \Magento\Framework\App\Action\HttpPostActionInterface, \Magento\Framework\App\Action\HttpGetActionInterface
@@ -7,11 +8,16 @@ class MarkAsRead extends \Magento\Backend\App\Action implements \Magento\Framewo
 
     protected \MageSuite\NotificationDashboard\Api\NotificationRepositoryInterface $notificationRepository;
 
+    protected \MageSuite\NotificationDashboard\Logger\Logger $logger;
+
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \MageSuite\NotificationDashboard\Api\NotificationRepositoryInterface $notificationRepository
+        \MageSuite\NotificationDashboard\Api\NotificationRepositoryInterface $notificationRepository,
+        \MageSuite\NotificationDashboard\Logger\Logger $logger
     ) {
         $this->notificationRepository = $notificationRepository;
+        $this->logger = $logger;
+
         parent::__construct($context);
     }
 
@@ -32,6 +38,7 @@ class MarkAsRead extends \Magento\Backend\App\Action implements \Magento\Framewo
             $this->messageManager->addSuccess(__('You marked notification as read.'));
         } catch (\Exception $e) {
             $this->messageManager->addError($e->getMessage());
+            $this->logger->warning($e->getMessage());
         }
 
         return $resultRedirect->setPath($backUrl);

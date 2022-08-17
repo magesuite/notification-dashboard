@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Model;
 
 class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\CollectorUserRepositoryInterface
@@ -31,6 +32,9 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
         $this->collectionProcessor = $collectionProcessor;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function save($collectorUser)
     {
         try {
@@ -42,6 +46,9 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
         return $collectorUser;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getById($id)
     {
         $collectorUser = $this->collectorUserFactory->create();
@@ -54,6 +61,9 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
         return $collectorUser;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getByCollectorIds($collectorIds)
     {
         $searchCriteria = $this->searchCriteriaBuilder
@@ -69,6 +79,9 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
         return $list->getItems();
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria = null)
     {
         $collection = $this->collectionFactory->create();
@@ -87,6 +100,9 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
         return $searchResults;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function delete($collectorUser)
     {
         try {
@@ -97,6 +113,9 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
         return true;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function deleteById($id)
     {
         return $this->delete($this->getById($id));

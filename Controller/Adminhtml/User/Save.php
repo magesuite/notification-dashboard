@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Controller\Adminhtml\User;
 
 class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App\Action\HttpPostActionInterface
@@ -50,6 +51,7 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
                     $user = $this->userRepository->getById($id);
                 } catch (\Magento\Framework\Exception\LocalizedException $e) {
                     $this->messageManager->addErrorMessage(__('This user no longer exists.'));
+                    $this->logger->warning($e->getMessage());
                     return $resultRedirect->setPath('*/*/index');
                 }
             }
@@ -69,8 +71,10 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
                 return $resultRedirect->setPath('*/*/index');
             } catch (\Magento\Framework\Exception\LocalizedException $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
+                $this->logger->warning($e->getMessage());
             } catch (\Exception $e) {
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the user.'));
+                $this->logger->warning($e->getMessage());
             }
 
             $this->dataPersistor->set('notification_dashboard_user', $data);

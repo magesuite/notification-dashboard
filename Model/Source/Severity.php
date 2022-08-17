@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Model\Source;
 
 class Severity implements \Magento\Framework\Data\OptionSourceInterface

@@ -5,9 +5,5 @@ $collectorRepository = $objectManager->create(\MageSuite\NotificationDashboard\M
 $collectors = $collectorRepository->getList();
 
 foreach ($collectors->getItems() as $collector) {
-    try {
-        $collectorRepository->delete($collector);
-    } catch (\Exception $e) {
-        // Already removed
-    }
+    $collectorRepository->delete($collector);
 }

@@ -21,9 +21,7 @@ class Notification extends \Magento\Backend\Block\Widget\Grid\Extended
     {
         parent::_construct();
 
-        $this->setId(
-            sprintf('dashboard_notification_%s', $this->getData('collector_id'))
-        );
+        $this->setId(sprintf('dashboard_notification_%s', $this->getData('collector_id')));
 
         $this->setPagerVisibility(false);
         $this->setFilterVisibility(false);

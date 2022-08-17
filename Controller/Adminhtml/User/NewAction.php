@@ -1,4 +1,5 @@
 <?php
+
 namespace MageSuite\NotificationDashboard\Controller\Adminhtml\User;
 
 class NewAction extends \Magento\Backend\App\Action implements \Magento\Framework\App\Action\HttpGetActionInterface

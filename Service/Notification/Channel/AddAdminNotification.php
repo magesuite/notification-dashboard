@@ -2,7 +2,7 @@
 
 namespace MageSuite\NotificationDashboard\Service\Notification\Channel;
 
-class Admin
+class AddAdminNotification
 {
     protected $severityMap = [
         \MageSuite\NotificationDashboard\Model\Source\Severity::SEVERITY_CRITICAL => \Magento\Framework\Notification\MessageInterface::SEVERITY_CRITICAL,

@@ -35,7 +35,7 @@
     <type name="MageSuite\NotificationDashboard\Service\Notification\Channel\Resolver">
         <arguments>
             <argument name="channels" xsi:type="array">
-                <item name="email" xsi:type="object">MageSuite\NotificationDashboard\Service\Notification\Channel\Email</item>
+                <item name="send_email" xsi:type="object">MageSuite\NotificationDashboard\Service\Notification\Channel\SendEmail</item>
             </argument>
         </arguments>
     </type>

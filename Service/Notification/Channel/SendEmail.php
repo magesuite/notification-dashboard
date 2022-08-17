@@ -2,7 +2,7 @@
 
 namespace MageSuite\NotificationDashboard\Service\Notification\Channel;
 
-class Email
+class SendEmail
 {
     const EMAIL_TEMPLATE_IDENTIFIER = 'notification';
 
@@ -42,7 +42,7 @@ class Email
 
         $count = count($emails);
         for ($i = 1; $i < $count; $i++) {
-            $transport->addCc($emails[$i]);
+            $transport->addBcc($emails[$i]);
         }
 
         $transport->getTransport()->sendMessage();
