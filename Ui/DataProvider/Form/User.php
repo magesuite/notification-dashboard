@@ -7,9 +7,9 @@ class User extends \Magento\Ui\DataProvider\AbstractDataProvider
     protected ?array $loadedData = null;
 
     /**
-     * @var \MageSuite\NotificationDashboard\Model\ResourceModel\User\CollectionFactory
+     * @var \MageSuite\NotificationDashboard\Model\ResourceModel\User\Collection
      */
-    protected $collectionFactory;
+    protected $collection;
 
     protected \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor;
 
@@ -24,7 +24,7 @@ class User extends \Magento\Ui\DataProvider\AbstractDataProvider
     ) {
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
 
-        $this->collectionFactory = $collectionFactory;
+        $this->collection = $collectionFactory->create();
         $this->dataPersistor = $dataPersistor;
     }
 
@@ -34,8 +34,7 @@ class User extends \Magento\Ui\DataProvider\AbstractDataProvider
             return $this->loadedData;
         }
 
-        $collection = $this->collectionFactory->create();
-        $items = $collection->getItems();
+        $items = $this->collection->getItems();
 
         foreach ($items as $user) {
             $this->loadedData[$user->getId()] = [
@@ -46,7 +45,7 @@ class User extends \Magento\Ui\DataProvider\AbstractDataProvider
         $data = $this->dataPersistor->get('notification_dashboard_user');
 
         if (!empty($data)) {
-            $user = $collection->getNewEmptyItem();
+            $user = $this->collection->getNewEmptyItem();
             $user->setData($data);
             $this->loadedData[$user->getId()] = $user->getData();
             $this->dataPersistor->clear('notification_dashboard_user');
