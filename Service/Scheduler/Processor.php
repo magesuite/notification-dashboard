@@ -22,16 +22,16 @@ class Processor
 
     public function execute($collectorId)
     {
-        $processorInstance = $this->getProcessorInstance($collectorId);
+        $commandInstance = $this->getCommandInstance($collectorId);
 
         if (empty($processorInstance)) {
             return null;
         }
 
-        $processorInstance->execute();
+        $commandInstance->execute();
     }
 
-    public function getProcessorInstance($collectorId)
+    public function getCommandInstance($collectorId)
     {
         try {
             $collector = $this->collectorRepository->getById((int)$collectorId);
@@ -40,12 +40,12 @@ class Processor
                 return null;
             }
 
-            $processorInstance = $this->collectorTypeResolver->getProcessorInstance($collector->getType());
+            $commandInstance = $this->collectorTypeResolver->getCommandInstance($collector->getType());
 
-            $processorInstance->setCollector($collector);
-            $processorInstance->setConfiguration($collector);
+            $commandInstance->setCollector($collector);
+            $commandInstance->setConfiguration($collector);
             
-            return $processorInstance;
+            return $commandInstance;
         } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
             $this->logger->critical(sprintf('Can`t found collector with id: %s', $collectorId));
             return null;

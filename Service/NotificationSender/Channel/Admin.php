@@ -1,8 +1,8 @@
 <?php
 
-namespace MageSuite\NotificationDashboard\Service\Notification\Channel;
+namespace MageSuite\NotificationDashboard\Service\NotificationSender\Channel;
 
-class AddAdminNotification
+class Admin
 {
     protected $severityMap = [
         \MageSuite\NotificationDashboard\Model\Source\Severity::SEVERITY_CRITICAL => \Magento\Framework\Notification\MessageInterface::SEVERITY_CRITICAL,
@@ -27,7 +27,7 @@ class AddAdminNotification
         $this->logger = $logger;
     }
 
-    public function execute($notification)
+    public function send($notification)
     {
         $message = $this->addRawDataToMessage->execute($notification);
 

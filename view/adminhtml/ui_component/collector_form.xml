@@ -255,7 +255,7 @@
                         </select>
                     </formElements>
                 </field>
-                <field name="send_email" formElement="checkbox">
+                <field name="send_to_email" formElement="checkbox">
                     <argument name="data" xsi:type="array">
                         <item name="config" xsi:type="array">
                             <item name="fit" xsi:type="boolean">false</item>

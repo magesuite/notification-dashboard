@@ -1,8 +1,8 @@
 <?php
 
-namespace MageSuite\NotificationDashboard\Service;
+namespace MageSuite\NotificationDashboard\Model\Command\Notification;
 
-interface ProcessorInterface
+interface CollectAndSendInterface
 {
     /**
      * @param \MageSuite\NotificationDashboard\Model\Data\Collector $collector

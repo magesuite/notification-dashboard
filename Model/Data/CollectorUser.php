@@ -7,7 +7,7 @@ class CollectorUser extends \Magento\Framework\Model\AbstractModel
     const ID = 'id';
     const COLLECTOR_ID = 'collector_id';
     const USER_ID = 'user_id';
-    const SEND_EMAIL = 'send_email';
+    const SEND_TO_EMAIL = 'send_to_email';
 
     const CACHE_TAG = 'notification_dashboard_notification';
     const EVENT_PREFIX = 'notification_dashboard_notification';
@@ -35,9 +35,9 @@ class CollectorUser extends \Magento\Framework\Model\AbstractModel
         return $this->getData(self::USER_ID);
     }
 
-    public function getSendEmail()
+    public function getSendToEmail()
     {
-        return $this->getData(self::SEND_EMAIL);
+        return $this->getData(self::SEND_TO_EMAIL);
     }
 
     public function setId($id)
@@ -58,9 +58,9 @@ class CollectorUser extends \Magento\Framework\Model\AbstractModel
         return $this;
     }
 
-    public function setSendEmail($sendEmail)
+    public function setSendToEmail($sendToEmail)
     {
-        $this->setData(self::SEND_EMAIL, $sendEmail);
+        $this->setData(self::SEND_TO_EMAIL, $sendToEmail);
         return $this;
     }
 }

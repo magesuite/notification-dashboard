@@ -1,8 +1,8 @@
 <?php
 
-namespace MageSuite\NotificationDashboard\Service\Notification\Channel;
+namespace MageSuite\NotificationDashboard\Service\NotificationSender\Channel;
 
-class SendEmail
+class Email
 {
     const EMAIL_TEMPLATE_IDENTIFIER = 'notification';
 
@@ -26,7 +26,7 @@ class SendEmail
         $this->configuration = $configuration;
     }
 
-    public function execute($notification, $emails)
+    public function send($notification, $emails)
     {
         $this->inlineTranslation->suspend();
 

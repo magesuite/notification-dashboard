@@ -31,7 +31,7 @@
         <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"/>
         <column xsi:type="int" name="collector_id" padding="10" unsigned="true" nullable="false"/>
         <column xsi:type="int" name="user_id" padding="10" unsigned="true" nullable="false"/>
-        <column xsi:type="tinyint" name="send_email" default="0" />
+        <column xsi:type="tinyint" name="send_to_email" default="0" />
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>
         </constraint>

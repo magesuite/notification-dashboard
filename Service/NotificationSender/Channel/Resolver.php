@@ -1,6 +1,6 @@
 <?php
 
-namespace MageSuite\NotificationDashboard\Service\Notification\Channel;
+namespace MageSuite\NotificationDashboard\Service\NotificationSender\Channel;
 
 class Resolver
 {

@@ -8,16 +8,16 @@ class AddNotification
 
     protected \MageSuite\NotificationDashboard\Model\NotificationRepository $notificationRepository;
 
-    protected \MageSuite\NotificationDashboard\Service\Notification\Processor $notificationProcessor;
+    protected \MageSuite\NotificationDashboard\Service\NotificationSender\SenderResolver $notificationSenderResolver;
 
     public function __construct(
         \MageSuite\NotificationDashboard\Model\Data\NotificationFactory $notificationFactory,
         \MageSuite\NotificationDashboard\Model\NotificationRepository $notificationRepository,
-        \MageSuite\NotificationDashboard\Service\Notification\Processor $notificationProcessor
+        \MageSuite\NotificationDashboard\Service\NotificationSender\SenderResolver $notificationSenderResolver
     ) {
         $this->notificationFactory = $notificationFactory;
         $this->notificationRepository = $notificationRepository;
-        $this->notificationProcessor = $notificationProcessor;
+        $this->notificationSenderResolver = $notificationSenderResolver;
     }
 
     public function execute($message, $collectorId, $severity, $title = null) //phpcs:ignore
@@ -35,6 +35,6 @@ class AddNotification
             ->setSeverity($severity);
 
         $notification = $this->notificationRepository->save($notification);
-        $this->notificationProcessor->execute([$notification]);
+        $this->notificationSenderResolver->resolve([$notification]);
     }
 }

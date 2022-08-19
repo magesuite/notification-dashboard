@@ -1,8 +1,8 @@
 <?php
 
-namespace MageSuite\NotificationDashboard\Service;
+namespace MageSuite\NotificationDashboard\Model\Command\Notification;
 
-abstract class Processor implements ProcessorInterface
+abstract class CollectAndSend implements CollectAndSendInterface
 {
     protected \Magento\Framework\Serialize\SerializerInterface $serializer;
 
@@ -19,18 +19,30 @@ abstract class Processor implements ProcessorInterface
         $this->addNotification = $addNotification;
     }
 
+    /**
+     * @inheritDoc
+     */
     abstract public function execute();
 
+    /**
+     * @inheritDoc
+     */
     public function setCollector($collector)
     {
         $this->collector = $collector;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getCollector()
     {
         return $this->collector;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function setConfiguration($collector)
     {
         $configuration = $collector->getConfiguration();
@@ -44,6 +56,9 @@ abstract class Processor implements ProcessorInterface
         $this->configuration = $this->serializer->unserialize($configuration);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getConfiguration()
     {
         return $this->configuration;

@@ -16,6 +16,8 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
 
     protected \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor;
 
+    protected array $collectorUsers = [];
+
     public function __construct(
         \MageSuite\NotificationDashboard\Model\ResourceModel\CollectorUser $resourceModel,
         \MageSuite\NotificationDashboard\Model\Data\CollectorUserFactory $collectorUserFactory,
@@ -51,6 +53,10 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
      */
     public function getById($id)
     {
+        if (isset($this->collectorUsers[$id])) {
+            return $this->collectorUsers[$id];
+        }
+
         $collectorUser = $this->collectorUserFactory->create();
         $this->resourceModel->load($collectorUser, $id);
 
@@ -58,7 +64,8 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
             throw new \Magento\Framework\Exception\NoSuchEntityException(__('The collector user with the "%1" ID doesn\'t exist.', $id));
         }
 
-        return $collectorUser;
+        $this->collectorUsers[$id] = $collectorUser;
+        return $this->collectorUsers[$id];
     }
 
     /**

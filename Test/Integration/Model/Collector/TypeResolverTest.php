@@ -21,12 +21,12 @@ class TypeResolverTest extends \PHPUnit\Framework\TestCase
         $collectorTypes = [
             'missing_data' => [
                 'label' => 'Missing data',
-                'processor' => 'Dummy class',
+                'command' => 'Dummy class',
                 'sortOrder' => 10
             ],
             'too_many_items' => [
                 'label' => 'Too many items',
-                'processor' => 'Another dummy class',
+                'command' => 'Another dummy class',
                 'sortOrder' => 20
             ]
         ];
@@ -42,10 +42,10 @@ class TypeResolverTest extends \PHPUnit\Framework\TestCase
         $types = $typeResolver->getCollectorTypes();
 
         $this->assertCount(2, $types);
-        $this->assertEquals('Dummy class', $types['missing_data']['processor']);
+        $this->assertEquals('Dummy class', $types['missing_data']['command']);
         $this->assertEquals('Too many items', $types['too_many_items']['label']);
 
-        $processor = $typeResolver->getProcessorInstance('too_many_items');
-        $this->assertEquals('Another dummy class', $processor);
+        $command = $typeResolver->getCommandInstance('too_many_items');
+        $this->assertEquals('Another dummy class', $command);
     }
 }

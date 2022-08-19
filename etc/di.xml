@@ -32,10 +32,10 @@
         </arguments>
     </type>
 
-    <type name="MageSuite\NotificationDashboard\Service\Notification\Channel\Resolver">
+    <type name="MageSuite\NotificationDashboard\Service\NotificationSender\Channel\Resolver">
         <arguments>
             <argument name="channels" xsi:type="array">
-                <item name="send_email" xsi:type="object">MageSuite\NotificationDashboard\Service\Notification\Channel\SendEmail</item>
+                <item name="send_to_email" xsi:type="object">MageSuite\NotificationDashboard\Service\NotificationSender\Channel\Email</item>
             </argument>
         </arguments>
     </type>

@@ -16,7 +16,7 @@ class TypeResolver
         return $this->collectorTypes;
     }
 
-    public function getProcessorInstance($type)
+    public function getCommandInstance($type)
     {
         if (!$type) {
             return null;
@@ -27,7 +27,7 @@ class TypeResolver
                 continue;
             }
 
-            return $collector['processor'];
+            return $collector['command'];
         }
 
         return null;

@@ -33,7 +33,7 @@
             "id": true,
             "collector_id": true,
             "user_id": true,
-            "send_email": true
+            "send_to_email": true
         },
         "constraint": {
             "PRIMARY": true,

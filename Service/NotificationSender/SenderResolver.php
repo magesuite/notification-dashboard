@@ -1,8 +1,8 @@
 <?php
 
-namespace MageSuite\NotificationDashboard\Service\Notification;
+namespace MageSuite\NotificationDashboard\Service\NotificationSender;
 
-class Processor
+class SenderResolver
 {
     protected \MageSuite\NotificationDashboard\Model\CollectorRepository $collectorRepository;
 
@@ -10,9 +10,9 @@ class Processor
 
     protected \MageSuite\NotificationDashboard\Model\CollectorUserRepository $collectorUserRepository;
 
-    protected \MageSuite\NotificationDashboard\Service\Notification\Channel\AddAdminNotification $addAdminNotification;
+    protected \MageSuite\NotificationDashboard\Service\NotificationSender\Channel\Admin $adminChannel;
 
-    protected \MageSuite\NotificationDashboard\Service\Notification\Channel\Resolver $notificationChannelResolver;
+    protected \MageSuite\NotificationDashboard\Service\NotificationSender\Channel\Resolver $notificationChannelResolver;
 
     protected \MageSuite\NotificationDashboard\Logger\Logger $logger;
 
@@ -20,19 +20,19 @@ class Processor
         \MageSuite\NotificationDashboard\Model\CollectorRepository $collectorRepository,
         \MageSuite\NotificationDashboard\Model\UserRepository $userRepository,
         \MageSuite\NotificationDashboard\Model\CollectorUserRepository $collectorUserRepository,
-        \MageSuite\NotificationDashboard\Service\Notification\Channel\AddAdminNotification $addAdminNotification,
-        \MageSuite\NotificationDashboard\Service\Notification\Channel\Resolver $notificationChannelResolver,
+        \MageSuite\NotificationDashboard\Service\NotificationSender\Channel\Admin $adminChannel,
+        \MageSuite\NotificationDashboard\Service\NotificationSender\Channel\Resolver $notificationChannelResolver,
         \MageSuite\NotificationDashboard\Logger\Logger $logger
     ) {
         $this->collectorRepository = $collectorRepository;
         $this->userRepository = $userRepository;
         $this->collectorUserRepository = $collectorUserRepository;
-        $this->addAdminNotification = $addAdminNotification;
+        $this->adminChannel = $adminChannel;
         $this->notificationChannelResolver = $notificationChannelResolver;
         $this->logger = $logger;
     }
 
-    public function execute($notifications)
+    public function resolve($notifications)
     {
         $notificationChannels = $this->notificationChannelResolver->getAllChannels();
 
@@ -43,17 +43,17 @@ class Processor
             $collector = $collectors[$collectorId];
 
             if ($collector->getAddAdminNotification()) {
-                $this->addAdminNotification->execute($notification);
+                $this->adminChannel->send($notification);
             }
 
-            foreach ($notificationChannels as $channelName => $channelProcessor) {
+            foreach ($notificationChannels as $channelName => $channel) {
                 $channelItems = $channelsData[$collectorId][$channelName] ?? [];
 
                 if (empty($channelItems)) {
                     continue;
                 }
 
-                $channelProcessor->execute($notification, $channelItems);
+                $channel->send($notification, $channelItems);
             }
 
             $this->addNotificationToLogs($notification);

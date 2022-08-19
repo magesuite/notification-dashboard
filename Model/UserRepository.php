@@ -16,6 +16,8 @@ class UserRepository implements \MageSuite\NotificationDashboard\Api\UserReposit
 
     protected \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor;
 
+    protected array $users;
+
     public function __construct(
         \MageSuite\NotificationDashboard\Model\ResourceModel\User $resourceModel,
         \MageSuite\NotificationDashboard\Model\Data\UserFactory $userFactory,
@@ -51,6 +53,10 @@ class UserRepository implements \MageSuite\NotificationDashboard\Api\UserReposit
      */
     public function getById($id)
     {
+        if (isset($this->users[$id])) {
+            return $this->users[$id];
+        }
+
         $user = $this->userFactory->create();
         $this->resourceModel->load($user, $id);
 
@@ -58,7 +64,8 @@ class UserRepository implements \MageSuite\NotificationDashboard\Api\UserReposit
             throw new \Magento\Framework\Exception\NoSuchEntityException(__('The user with the "%1" ID doesn\'t exist.', $id));
         }
 
-        return $user;
+        $this->users[$id] = $user;
+        return $this->users[$id];
     }
 
     /**
