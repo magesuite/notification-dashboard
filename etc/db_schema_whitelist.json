@@ -1,0 +1,59 @@
+{
+    "notification_dashboard_collector": {
+        "column": {
+            "id": true,
+            "is_enabled": true,
+            "name": true,
+            "type": true,
+            "severity": true,
+            "cron_expression": true,
+            "configuration": true,
+            "visible_on_dashboard": true,
+            "limit_on_dashboard": true,
+            "add_admin_notification": true,
+            "is_static": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "notification_dashboard_user": {
+        "column": {
+            "id": true,
+            "name": true,
+            "email": true,
+            "is_static": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "notification_dashboard_collector_user": {
+        "column": {
+            "id": true,
+            "collector_id": true,
+            "user_id": true,
+            "send_to_email": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_22D77629D0DE9489DD5197C660C09EB7": true,
+            "NTFC_DASHBOARD_COLLECTOR_USR_USR_ID_NTFC_DASHBOARD_USR_ID": true
+        }
+    },
+    "notification_dashboard_notification": {
+        "column": {
+            "id": true,
+            "collector_id": true,
+            "title": true,
+            "message": true,
+            "severity": true,
+            "is_read": true,
+            "created_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "NTFC_DASHBOARD_NTFC_COLLECTOR_ID_NTFC_DASHBOARD_COLLECTOR_ID": true
+        }
+    }
+}

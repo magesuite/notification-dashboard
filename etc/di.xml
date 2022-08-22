@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="MageSuite\NotificationDashboard\Api\UserRepositoryInterface" type="MageSuite\NotificationDashboard\Model\UserRepository"/>
+    <preference for="MageSuite\NotificationDashboard\Api\CollectorRepositoryInterface" type="MageSuite\NotificationDashboard\Model\CollectorRepository"/>
+    <preference for="MageSuite\NotificationDashboard\Api\CollectorUserRepositoryInterface" type="MageSuite\NotificationDashboard\Model\CollectorUserRepository"/>
+    <preference for="MageSuite\NotificationDashboard\Api\NotificationRepositoryInterface" type="MageSuite\NotificationDashboard\Model\NotificationRepository"/>
+
+    <type name="MageSuite\NotificationDashboard\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+
+    <type name="MageSuite\NotificationDashboard\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">notificationDashboardLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">MageSuite\NotificationDashboard\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="MageSuite\Schedule\Model\SchedulerJobsCollector">
+        <arguments>
+            <argument name="jobsGroups" xsi:type="array">
+                <item name="notificationDashboard" xsi:type="array">
+                    <item name="cronjob" xsi:type="object">MageSuite\NotificationDashboard\Model\Schedule\Jobs</item>
+                    <item name="processor" xsi:type="object">MageSuite\NotificationDashboard\Service\Scheduler\Processor</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="MageSuite\NotificationDashboard\Service\NotificationSender\Channel\Resolver">
+        <arguments>
+            <argument name="channels" xsi:type="array">
+                <item name="send_to_email" xsi:type="object">MageSuite\NotificationDashboard\Service\NotificationSender\Channel\Email</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
