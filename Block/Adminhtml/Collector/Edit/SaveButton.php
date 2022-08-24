@@ -11,9 +11,27 @@ class SaveButton extends \MageSuite\NotificationDashboard\Block\Adminhtml\Button
         }
 
         return [
-            'id_hard' => 'save',
+            'id_hard' => 'save_and_continue',
             'label' => __('Save'),
-            'class' => 'save primary'
+            'class' => 'save primary',
+            'data_attribute' => [
+                'mage-init' => [
+                    'buttonAdapter' => [
+                        'actions' => [
+                            [
+                                'targetName' => 'collector_form.collector_form',
+                                'actionName' => 'save',
+                                'params' => [
+                                    true,
+                                    [
+                                        'back' => 'continue'
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
         ];
     }
 }
