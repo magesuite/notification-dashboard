@@ -87,7 +87,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="fit" xsi:type="boolean">false</item>
-                    <item name="notice" xsi:type="string" translate="true">Important! If the value is set to yes, the ability to edit and delete a user in the admin panel will be disabled.</item>
+                    <item name="additionalInfo" xsi:type="string"><![CDATA[<strong style="color:darkred;">Important!</strong> If the value is set to yes, the ability to edit and delete a user in the admin panel will be disabled.]]></item>
                 </item>
             </argument>
             <settings>

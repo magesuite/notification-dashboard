@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="MageSuite_NotificationDashboard::notification_dashboard" title="Notification Dashboard" translate="title" module="Magento_Sales" sortOrder="10" parent="Magento_Sales::sales" resource="Magento_Sales::sales" />
+        <add id="MageSuite_NotificationDashboard::notification_dashboard" title="Notification Dashboard" translate="title" module="MageSuite_NotificationDashboard" sortOrder="10" parent="Magento_Backend::system" resource="Magento_Sales::sales" />
         <add id="MageSuite_NotificationDashboard::dashboard" title="Dashboard" translate="title" module="MageSuite_NotificationDashboard" sortOrder="10" parent="MageSuite_NotificationDashboard::notification_dashboard" action="notification_dashboard/dashboard" resource="MageSuite_NotificationDashboard::notification_dashboard" />
         <add id="MageSuite_NotificationDashboard::user" title="Users" translate="title" module="MageSuite_NotificationDashboard" sortOrder="20" parent="MageSuite_NotificationDashboard::notification_dashboard" action="notification_dashboard/user" resource="MageSuite_NotificationDashboard::notification_dashboard" />
         <add id="MageSuite_NotificationDashboard::collector" title="Collectors" translate="title" module="MageSuite_NotificationDashboard" sortOrder="30" parent="MageSuite_NotificationDashboard::notification_dashboard" action="notification_dashboard/collector" resource="MageSuite_NotificationDashboard::notification_dashboard" />

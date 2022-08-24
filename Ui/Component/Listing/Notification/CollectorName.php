@@ -32,7 +32,8 @@ class CollectorName extends \Magento\Ui\Component\Listing\Columns\Column
                 continue;
             }
 
-            $item[$fieldName] = $this->collectorRepository->getById($item['collector_id']);
+            $collector = $this->collectorRepository->getById($item['collector_id']);
+            $item[$fieldName] = $collector->getName();
         }
 
         return $dataSource;

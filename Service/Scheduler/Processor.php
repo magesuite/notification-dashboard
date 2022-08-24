@@ -24,7 +24,7 @@ class Processor
     {
         $commandInstance = $this->getCommandInstance($collectorId);
 
-        if (empty($processorInstance)) {
+        if (empty($commandInstance)) {
             return null;
         }
 

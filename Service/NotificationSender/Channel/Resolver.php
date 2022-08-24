@@ -4,6 +4,8 @@ namespace MageSuite\NotificationDashboard\Service\NotificationSender\Channel;
 
 class Resolver
 {
+    const CHANNEL_TYPE_NAME_PREFIX = 'send_to_';
+
     protected \MageSuite\NotificationDashboard\Model\UserRepository $userRepository;
 
     protected \MageSuite\NotificationDashboard\Model\CollectorUserRepository $collectorUserRepository;
@@ -43,7 +45,8 @@ class Resolver
                     continue;
                 }
 
-                $channelDataGropedByCollector[$collectorId][$channelName][] = $user->getData($channelName);
+                $channelNameWithoutPrefix = str_replace(self::CHANNEL_TYPE_NAME_PREFIX, '', $channelName);
+                $channelDataGropedByCollector[$collectorId][$channelName][] = $user->getData($channelNameWithoutPrefix);
             }
         }
 
