@@ -11,16 +11,24 @@ class SaveButton extends \MageSuite\NotificationDashboard\Block\Adminhtml\Button
         }
 
         return [
-            'id_hard' => 'save_and_continue',
             'label' => __('Save'),
             'class' => 'save primary',
+            'class_name' => \Magento\Ui\Component\Control\Container::SPLIT_BUTTON,
+            'options' => $this->getOptions(),
+        ];
+    }
+
+    protected function getOptions()
+    {
+        $options[] = [
+            'id_hard' => 'save_and_continue',
+            'label' => __('Save'),
+            'default' => true,
             'data_attribute' => [
                 'mage-init' => [
                     'buttonAdapter' => [
                         'actions' => [
                             [
-                                'targetName' => 'user_form.user_form',
-                                'actionName' => 'save',
                                 'params' => [
                                     true,
                                     [
@@ -33,5 +41,26 @@ class SaveButton extends \MageSuite\NotificationDashboard\Block\Adminhtml\Button
                 ]
             ]
         ];
+
+        $options[] = [
+            'id_hard' => 'save',
+            'label' => __('Save & Close'),
+            'default' => false,
+            'data_attribute' => [
+                'mage-init' => [
+                    'buttonAdapter' => [
+                        'actions' => [
+                            [
+                                'params' => [
+                                    true
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        return $options;
     }
 }
