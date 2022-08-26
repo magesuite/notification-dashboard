@@ -1,0 +1,13 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:MageSuite_Changelog:etc/changelog.xsd">
+    <module id="MageSuite_NotificationDashboard" name="MageSuite_NotificationDashboard">
+        <changelog>
+            <tag version="1.0.4" date="2022-08-26">
+                <entry>
+                    <type>FIX</type>
+                    <overview>Fix issue with class initialization</overview>
+                    <description>If any collector type weren't declared, throws a fatal error</description>
+                </entry>
+            </tag>
+        </changelog>
+    </module>
+</config>

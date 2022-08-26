@@ -4,9 +4,9 @@ namespace MageSuite\NotificationDashboard\Model\Collector;
 
 class TypeResolver
 {
-    protected array $collectorTypes = [];
+    protected array $collectorTypes;
 
-    public function __construct(array $collectorTypes)
+    public function __construct(array $collectorTypes = [])
     {
         $this->collectorTypes = $collectorTypes;
     }
