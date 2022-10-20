@@ -39,4 +39,31 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="MageSuite\NotificationDashboard\Model\Collector\TypeResolver">
+        <arguments>
+            <argument name="collectorTypes" xsi:type="array">
+                <item name="not_paid_invoice" xsi:type="array">
+                    <item name="label" xsi:type="string">Orders - Not paid invoice</item>
+                    <item name="command" xsi:type="object">MageSuite\NotificationDashboard\Model\Command\Notification\Collector\GetOrdersWithNotPaidInvoices</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+                <item name="not_updated_order_status" xsi:type="array">
+                    <item name="label" xsi:type="string">Orders - Not updated status</item>
+                    <item name="command" xsi:type="object">MageSuite\NotificationDashboard\Model\Command\Notification\Collector\GetOrdersWithNotUpdatedStatus</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                </item>
+                <item name="missing_payment_methods" xsi:type="array">
+                    <item name="label" xsi:type="string">Payment - Missing payment methods</item>
+                    <item name="command" xsi:type="object">MageSuite\NotificationDashboard\Model\Command\Notification\Collector\GetAvailablePaymentMethods</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                </item>
+                <item name="products_without_images" xsi:type="array">
+                    <item name="label" xsi:type="string">Products - Missing images</item>
+                    <item name="command" xsi:type="object">MageSuite\NotificationDashboard\Model\Command\Notification\Collector\GetProductsWithoutImages</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
