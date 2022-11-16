@@ -8,6 +8,13 @@
                     <description>If any collector type weren't declared, throws a fatal error</description>
                 </entry>
             </tag>
+            <tag version="1.0.6" date="2022-10-20">
+                <entry>
+                    <type>FEATURE</type>
+                    <overview>Added general collectors</overview>
+                    <description>Added collectors that can be used in all projects</description>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>

@@ -320,4 +320,149 @@
             </formElements>
         </field>
     </fieldset>
+    <fieldset name="not_paid_invoice" class="MageSuite\NotificationDashboard\Ui\Component\Form\FieldsetVisibility" sortOrder="10">
+        <settings>
+            <collapsible>false</collapsible>
+            <label>Orders - Not paid invoice</label>
+        </settings>
+        <field name="time_delay" sortOrder="10" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">collector</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Time delay (in days)</label>
+                <notice>Check only orders older than X days</notice>
+            </settings>
+        </field>
+        <field name="time_period" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">collector</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Time period (in days)</label>
+                <notice>Check the open invoices over a period of X days</notice>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="not_updated_order_status" class="MageSuite\NotificationDashboard\Ui\Component\Form\FieldsetVisibility" sortOrder="20">
+        <settings>
+            <collapsible>false</collapsible>
+            <label>Orders - Not updated status</label>
+        </settings>
+        <field name="status" sortOrder="10" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="fit" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label>Order Status</label>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Sales\Model\Config\Source\Order\Status"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="time_delay" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">collector</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Time delay (in days)</label>
+                <notice>Check only orders older than X days</notice>
+            </settings>
+        </field>
+        <field name="time_period" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">collector</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Time period (in days)</label>
+                <notice>Check the open invoices over a period of X days</notice>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="missing_payment_methods" class="MageSuite\NotificationDashboard\Ui\Component\Form\FieldsetVisibility" sortOrder="20">
+        <settings>
+            <collapsible>false</collapsible>
+            <label>Payment - Missing payment methods</label>
+        </settings>
+        <container name="container_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="template" xsi:type="string">ui/form/components/complex</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="label" xsi:type="string">Notice</item>
+                    <item name="text" xsi:type="string" translate="true">Configuration for this collector is not needed.</item>
+                </item>
+            </argument>
+        </container>
+    </fieldset>
+    <fieldset name="products_without_images" class="MageSuite\NotificationDashboard\Ui\Component\Form\FieldsetVisibility" sortOrder="20">
+        <settings>
+            <collapsible>false</collapsible>
+            <label>Products - Missing images</label>
+        </settings>
+        <field name="type_ids" sortOrder="10" formElement="multiselect">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="fit" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label>Product Type</label>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Magento\Catalog\Model\Product\Type"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+        <field name="excluded_skus" sortOrder="20" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="rows" xsi:type="number">5</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label>Excluded skus</label>
+                <notice>Script will not add notification for products with gives skus. Use , as separator: 00001,00002,00005</notice>
+            </settings>
+        </field>
+    </fieldset>
 </form>
