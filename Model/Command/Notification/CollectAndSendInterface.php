@@ -8,7 +8,7 @@ interface CollectAndSendInterface
      * @param \MageSuite\NotificationDashboard\Model\Data\Collector $collector
      * @return void
      */
-    public function setCollector($collector);
+    public function setCollector(\MageSuite\NotificationDashboard\Model\Data\Collector $collector);
 
     /**
      * @return \MageSuite\NotificationDashboard\Model\Data\Collector
@@ -19,7 +19,7 @@ interface CollectAndSendInterface
      * @param \MageSuite\NotificationDashboard\Model\Data\Collector $collector
      * @return void
      */
-    public function setConfiguration($collector);
+    public function setConfiguration(\MageSuite\NotificationDashboard\Model\Data\Collector $collector);
 
     /**
      * @return array

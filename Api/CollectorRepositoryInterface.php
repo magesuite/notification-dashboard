@@ -15,6 +15,13 @@ interface CollectorRepositoryInterface
     public function save($collector);
 
     /**
+     * @param string $name
+     * @return \MageSuite\NotificationDashboard\Model\Data\Collector
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
+    public function get(string $name);
+
+    /**
      * @param int $id
      * @return \MageSuite\NotificationDashboard\Model\Data\Collector
      * @throws \Magento\Framework\Exception\NoSuchEntityException

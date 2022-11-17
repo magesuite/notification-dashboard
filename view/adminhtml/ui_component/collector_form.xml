@@ -142,7 +142,6 @@
             </argument>
             <settings>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
                     <rule name="max_text_length" xsi:type="number">50</rule>
                 </validation>
                 <dataType>text</dataType>

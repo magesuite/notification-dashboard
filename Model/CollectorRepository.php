@@ -18,6 +18,8 @@ class CollectorRepository implements \MageSuite\NotificationDashboard\Api\Collec
 
     protected array $collectors = [];
 
+    protected array $collectorsByName = [];
+
     public function __construct(
         \MageSuite\NotificationDashboard\Model\ResourceModel\Collector $resourceModel,
         \MageSuite\NotificationDashboard\Model\Data\CollectorFactory $collectorFactory,
@@ -61,11 +63,39 @@ class CollectorRepository implements \MageSuite\NotificationDashboard\Api\Collec
         $this->resourceModel->load($collector, $id);
 
         if (!$collector->getId()) {
-            throw new \Magento\Framework\Exception\NoSuchEntityException(__('The collector with the "%1" ID doesn\'t exist.', $id));
+            throw new \Magento\Framework\Exception\NoSuchEntityException(
+                __('The collector with the "%1" ID doesn\'t exist.', $id)
+            );
         }
 
         $this->collectors[$id] = $collector;
+        $this->collectorsByName[$collector->getName()] = $collector;
+
         return $this->collectors[$id];
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function get(string $name)
+    {
+        if (isset($this->collectorsByName[$name])) {
+            return $this->collectorsByName[$name];
+        }
+
+        $collector = $this->collectorFactory->create();
+        $this->resourceModel->load($collector, $name, \MageSuite\NotificationDashboard\Api\Data\CollectorInterface::NAME);
+
+        if (!$collector->getId()) {
+            throw new \Magento\Framework\Exception\NoSuchEntityException(
+                __('The collector with the "%1" name doesn\'t exist.', $name)
+            );
+        }
+
+        $this->collectors[$collector->getId()] = $collector;
+        $this->collectorsByName[$name] = $collector;
+
+        return $collector;
     }
 
     /**

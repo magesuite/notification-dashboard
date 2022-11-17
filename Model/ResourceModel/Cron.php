@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MageSuite\NotificationDashboard\Model\ResourceModel;
 
@@ -11,12 +12,14 @@ class Cron
         $this->connection = $resourceConnection->getConnection();
     }
 
-    public function getCollectorSchedulerJobs()
+    public function getCollectorSchedulerJobs(): array
     {
         $select = $this->connection
             ->select()
-            ->from(['ndc' => $this->connection->getTableName('notification_dashboard_collector')], ['id', 'cron_expression'])
-            ->where('ndc.is_enabled = ?', true);
+            ->from($this->connection->getTableName('notification_dashboard_collector'), ['id', 'cron_expression'])
+            ->where('is_enabled = ?', 1)
+            ->where('cron_expression IS NOT NULL')
+            ->where('type IS NOT NULL');
 
         return $this->connection->fetchAll($select);
     }

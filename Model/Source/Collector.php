@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MageSuite\NotificationDashboard\Model\Source;
 
@@ -13,23 +14,22 @@ class Collector implements \Magento\Framework\Data\OptionSourceInterface
         $this->collectorRepository = $collectorRepository;
     }
 
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         if ($this->options !== null) {
             return $this->options;
         }
 
         $collectors = $this->collectorRepository->getList();
-        $options = [];
+        $this->options = [];
 
         foreach ($collectors->getItems() as $collector) {
-            $options[] = [
+            $this->options[] = [
                 'value' => $collector->getId(),
                 'label' => $collector->getName()
             ];
         }
 
-        $this->options = $options;
         return $this->options;
     }
 }

@@ -1,10 +1,13 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-
     <preference for="MageSuite\NotificationDashboard\Api\UserRepositoryInterface" type="MageSuite\NotificationDashboard\Model\UserRepository"/>
+    <preference for="MageSuite\NotificationDashboard\Api\Data\UserInterface" type="MageSuite\NotificationDashboard\Model\Data\User"/>
     <preference for="MageSuite\NotificationDashboard\Api\CollectorRepositoryInterface" type="MageSuite\NotificationDashboard\Model\CollectorRepository"/>
+    <preference for="MageSuite\NotificationDashboard\Api\Data\CollectorInterface" type="MageSuite\NotificationDashboard\Model\Data\Collector"/>
     <preference for="MageSuite\NotificationDashboard\Api\CollectorUserRepositoryInterface" type="MageSuite\NotificationDashboard\Model\CollectorUserRepository"/>
+    <preference for="MageSuite\NotificationDashboard\Api\Data\CollectorUserInterface" type="MageSuite\NotificationDashboard\Model\Data\CollectorUser"/>
     <preference for="MageSuite\NotificationDashboard\Api\NotificationRepositoryInterface" type="MageSuite\NotificationDashboard\Model\NotificationRepository"/>
+    <preference for="MageSuite\NotificationDashboard\Api\Data\NotificationInterface" type="MageSuite\NotificationDashboard\Model\Data\Notification"/>
 
     <type name="MageSuite\NotificationDashboard\Logger\Handler">
         <arguments>
