@@ -22,33 +22,35 @@ class Processor
 
     public function execute($collectorId)
     {
-        $commandInstance = $this->getCommandInstance($collectorId);
-
-        if (empty($commandInstance)) {
-            return null;
+        try {
+            $commandInstance = $this->getCommandInstance($collectorId);
+            $commandInstance->execute();
+        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
+            $this->logger->critical(sprintf('Can`t found collector with id: %s', $collectorId));
+        } catch (\Magento\Framework\Exception\LocalizedException) { // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock
         }
-
-        $commandInstance->execute();
     }
 
     public function getCommandInstance($collectorId)
     {
-        try {
-            $collector = $this->collectorRepository->getById((int)$collectorId);
+        $collector = $this->collectorRepository->getById((int)$collectorId);
 
-            if (!$collector->getIsEnabled()) {
-                return null;
-            }
-
-            $commandInstance = $this->collectorTypeResolver->getCommandInstance($collector->getType());
-
-            $commandInstance->setCollector($collector);
-            $commandInstance->setConfiguration($collector);
-            
-            return $commandInstance;
-        } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
-            $this->logger->critical(sprintf('Can`t found collector with id: %s', $collectorId));
-            return null;
+        if (!$collector->getIsEnabled()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('Collector with ID: %1 is not enabled.', $collectorId)
+            );
         }
+
+        if (!$collector->getType()) {
+            throw new \Magento\Framework\Exception\LocalizedException(
+                __('Type is not defined for collector with ID: %1.', $collectorId)
+            );
+        }
+
+        $commandInstance = $this->collectorTypeResolver->getCommandInstance($collector->getType());
+        $commandInstance->setCollector($collector);
+        $commandInstance->setConfiguration($collector);
+
+        return $commandInstance;
     }
 }

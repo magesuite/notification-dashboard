@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MageSuite\NotificationDashboard\Model\Source\Collector;
 
@@ -13,33 +14,31 @@ class Type implements \Magento\Framework\Data\OptionSourceInterface
         $this->collectorTypeResolver = $collectorTypeResolver;
     }
 
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         if ($this->options !== null) {
             return $this->options;
         }
 
         $collectorTypes = $this->collectorTypeResolver->getCollectorTypes();
-
-        $options = [
+        $this->options = [
             [
                 'value' => '',
-                'label' => __('-- Please Select --')
+                'label' => __('None')
             ]
         ];
 
         foreach ($collectorTypes as $collectorType => $collector) {
-            $options[] = [
+            $this->options[] = [
                 'value' => $collectorType,
                 'label' => $collector['label']
             ];
         }
 
-        usort($options, function ($a, $b) {
-            return strcmp($a['label'], $b['label']);
+        usort($this->options, function ($a, $b) {
+            return strcmp((string)$a['label'], (string)$b['label']);
         });
 
-        $this->options = $options;
         return $this->options;
     }
 }

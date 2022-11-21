@@ -22,12 +22,7 @@ abstract class CollectAndSend implements CollectAndSendInterface
     /**
      * @inheritDoc
      */
-    abstract public function execute();
-
-    /**
-     * @inheritDoc
-     */
-    public function setCollector($collector)
+    public function setCollector(\MageSuite\NotificationDashboard\Model\Data\Collector $collector)
     {
         $this->collector = $collector;
     }
@@ -43,7 +38,7 @@ abstract class CollectAndSend implements CollectAndSendInterface
     /**
      * @inheritDoc
      */
-    public function setConfiguration($collector)
+    public function setConfiguration(\MageSuite\NotificationDashboard\Model\Data\Collector $collector)
     {
         $configuration = $collector->getConfiguration();
 
