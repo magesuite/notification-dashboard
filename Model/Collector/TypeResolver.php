@@ -34,7 +34,7 @@ class TypeResolver
         }
 
         throw new \Magento\Framework\Exception\LocalizedException(
-            __('The command instance is not defined for collector with ID: %1.', $collectorId)
+            __('The command instance is not defined for collector with type: %1.', $type)
         );
     }
 
