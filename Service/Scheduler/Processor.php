@@ -4,6 +4,8 @@ namespace MageSuite\NotificationDashboard\Service\Scheduler;
 
 class Processor
 {
+    protected \MageSuite\NotificationDashboard\Helper\Configuration $configuration;
+
     protected \MageSuite\NotificationDashboard\Model\CollectorRepository $collectorRepository;
 
     protected \MageSuite\NotificationDashboard\Model\Collector\TypeResolver $collectorTypeResolver;
@@ -11,10 +13,12 @@ class Processor
     protected \MageSuite\NotificationDashboard\Logger\Logger $logger;
 
     public function __construct(
+        \MageSuite\NotificationDashboard\Helper\Configuration $configuration,
         \MageSuite\NotificationDashboard\Model\CollectorRepository $collectorRepository,
         \MageSuite\NotificationDashboard\Model\Collector\TypeResolver $collectorTypeResolver,
         \MageSuite\NotificationDashboard\Logger\Logger $logger
     ) {
+        $this->configuration = $configuration;
         $this->collectorRepository = $collectorRepository;
         $this->collectorTypeResolver = $collectorTypeResolver;
         $this->logger = $logger;
@@ -22,6 +26,10 @@ class Processor
 
     public function execute($collectorId)
     {
+        if (!$this->configuration->isEnabled()) {
+            return;
+        }
+
         try {
             $commandInstance = $this->getCommandInstance($collectorId);
             $commandInstance->execute();

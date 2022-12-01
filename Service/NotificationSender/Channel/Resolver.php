@@ -29,7 +29,7 @@ class Resolver
 
     public function getChannelDataByCollectorIds($collectorIds)
     {
-        $users = $this->userRepository->getList()->getItems();
+        $users = $this->getUsers();
         $collectorUsers = $this->collectorUserRepository->getByCollectorIds($collectorIds);
 
         $channels = $this->getAllChannels();
@@ -46,10 +46,25 @@ class Resolver
                 }
 
                 $channelNameWithoutPrefix = str_replace(self::CHANNEL_TYPE_NAME_PREFIX, '', $channelName);
-                $channelDataGropedByCollector[$collectorId][$channelName][] = $user->getData($channelNameWithoutPrefix);
+
+                $channelDataGropedByCollector[$collectorId][$channelName][] = new \Magento\Framework\DataObject([
+                    'channel' => $user->getData($channelNameWithoutPrefix),
+                    'collector_user' => $collectorUser->getData()
+                ]);
             }
         }
 
         return $channelDataGropedByCollector;
+    }
+
+    protected function getUsers()
+    {
+        $users = [];
+
+        foreach ($this->userRepository->getList()->getItems() as $user) {
+            $users[$user->getId()] = $user;
+        }
+
+        return $users;
     }
 }

@@ -26,7 +26,7 @@ class Email
         $this->configuration = $configuration;
     }
 
-    public function send($notification, $emails)
+    public function send($notification, $channelsData)
     {
         $this->inlineTranslation->suspend();
 
@@ -38,11 +38,11 @@ class Email
             ->setTemplateOptions(['area' => 'adminhtml', 'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID])
             ->setTemplateVars(['message' => $message, 'title' => (string)$notification->getTitle()])
             ->setFromByScope($this->configuration->getEmailSenderInfo())
-            ->addTo($emails[0]);
+            ->addTo($channelsData[0]->getChannel());
 
-        $count = count($emails);
+        $count = count($channelsData);
         for ($i = 1; $i < $count; $i++) {
-            $transport->addBcc($emails[$i]);
+            $transport->addBcc($channelsData[$i]->getChannel());
         }
 
         $transport->getTransport()->sendMessage();
