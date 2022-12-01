@@ -2,7 +2,7 @@
 
 namespace MageSuite\NotificationDashboard\Api\Data;
 
-interface UserInterface
+interface UserInterface extends \Magento\Framework\Api\ExtensibleDataInterface
 {
     const ID = 'id';
     const NAME = 'name';
@@ -55,4 +55,15 @@ interface UserInterface
      * @return self
      */
     public function setIsStatic($isStatic);
+
+    /**
+     * @return \MageSuite\NotificationDashboard\Api\Data\UserExtensionInterface|null
+     */
+    public function getExtensionAttributes();
+
+    /**
+     * @param \MageSuite\NotificationDashboard\Api\Data\UserExtensionInterface $extensionAttributes
+     * @return self
+     */
+    public function setExtensionAttributes($extensionAttributes);
 }

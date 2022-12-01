@@ -2,7 +2,7 @@
 
 namespace MageSuite\NotificationDashboard\Model\Data;
 
-class User extends \Magento\Framework\Model\AbstractModel implements \MageSuite\NotificationDashboard\Api\Data\UserInterface
+class User extends \Magento\Framework\Model\AbstractExtensibleModel implements \MageSuite\NotificationDashboard\Api\Data\UserInterface
 {
     protected $_cacheTag = self::CACHE_TAG; //phpcs:ignore
     protected $_eventPrefix = self::EVENT_PREFIX; //phpcs:ignore
@@ -78,5 +78,21 @@ class User extends \Magento\Framework\Model\AbstractModel implements \MageSuite\
     {
         $this->setData(self::IS_STATIC, $isStatic);
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getExtensionAttributes()
+    {
+        return $this->_getExtensionAttributes();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setExtensionAttributes($extensionAttributes)
+    {
+        return $this->_setExtensionAttributes($extensionAttributes);
     }
 }

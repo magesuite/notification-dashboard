@@ -4,6 +4,7 @@ namespace MageSuite\NotificationDashboard\Helper;
 
 class Configuration
 {
+    const XML_PATH_NOTIFICATION_DASHBOARD_IS_ENABLED = 'notification_dashboard/general/is_enabled';
     const XML_PATH_EMAIL_GENERAL_NAME = 'trans_email/ident_general/name';
     const XML_PATH_EMAIL_GENERAL_EMAIL = 'trans_email/ident_general/email';
 
@@ -12,6 +13,11 @@ class Configuration
     public function __construct(\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfigInterface)
     {
         $this->scopeConfig = $scopeConfigInterface;
+    }
+
+    public function isEnabled()
+    {
+        return $this->scopeConfig->isSetFlag(self::XML_PATH_NOTIFICATION_DASHBOARD_IS_ENABLED);
     }
 
     public function getEmailSenderInfo()
