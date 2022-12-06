@@ -36,7 +36,7 @@ class Email
             ->create()
             ->setTemplateIdentifier(self::EMAIL_TEMPLATE_IDENTIFIER)
             ->setTemplateOptions(['area' => 'adminhtml', 'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID])
-            ->setTemplateVars(['message' => $message, 'title' => (string)$notification->getTitle()])
+            ->setTemplateVars(['message' => (string)$message, 'title' => (string)$notification->getTitle()])
             ->setFromByScope($this->configuration->getEmailSenderInfo())
             ->addTo($channelsData[0]->getChannel());
 
