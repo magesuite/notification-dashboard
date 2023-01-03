@@ -15,6 +15,13 @@
                     <description>Added collectors that can be used in all projects</description>
                 </entry>
             </tag>
+            <tag version="1.0.11" date="2022-12-22">
+                <entry>
+                    <type>FEATURE</type>
+                    <overview>Added to collector field for store additional data</overview>
+                    <ticket_id>IPET-1777</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>

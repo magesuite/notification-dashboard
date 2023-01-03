@@ -103,6 +103,14 @@ class Collector extends \Magento\Framework\Model\AbstractModel implements \MageS
     /**
      * @inheritDoc
      */
+    public function getAdditionalData()
+    {
+        return $this->getData(self::ADDITIONAL_DATA);
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function setId($id)
     {
         $this->setData(self::ID, $id);
@@ -196,6 +204,15 @@ class Collector extends \Magento\Framework\Model\AbstractModel implements \MageS
     public function setConfiguration($configuration)
     {
         $this->setData(self::CONFIGURATION, $configuration);
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setAdditionalData($additionalData)
+    {
+        $this->setData(self::ADDITIONAL_DATA, $additionalData);
         return $this;
     }
 }

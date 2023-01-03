@@ -15,6 +15,7 @@ interface CollectorInterface
     const ADD_ADMIN_NOTIFICATION = 'add_admin_notification';
     const IS_STATIC = 'is_static';
     const CONFIGURATION = 'configuration';
+    const ADDITIONAL_DATA = 'additional_data';
 
     const CACHE_TAG = 'notification_dashboard_user';
     const EVENT_PREFIX = 'notification_dashboard_user';
@@ -73,6 +74,11 @@ interface CollectorInterface
      * @return string|null
      */
     public function getConfiguration();
+
+    /**
+     * @return string|null
+     */
+    public function getAdditionalData();
 
     /**
      * @param int $id
@@ -139,4 +145,10 @@ interface CollectorInterface
      * @return self
      */
     public function setConfiguration($configuration);
+
+    /**
+     * @param $additionalData
+     * @return self
+     */
+    public function setAdditionalData($additionalData);
 }

@@ -12,6 +12,7 @@
         <column xsi:type="int" name="limit_on_dashboard" padding="10" unsigned="true" default="0" />
         <column xsi:type="tinyint" name="add_admin_notification" default="0" />
         <column xsi:type="tinyint" name="is_static" default="0" />
+        <column xsi:type="text" name="additional_data" nullable="true" />
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>
         </constraint>
