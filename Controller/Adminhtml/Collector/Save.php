@@ -64,6 +64,7 @@ class Save extends \Magento\Backend\App\Action implements \Magento\Framework\App
                 }
             }
 
+            unset($data[\MageSuite\NotificationDashboard\Api\Data\CollectorInterface::ADDITIONAL_DATA]);
             $data = $this->prepareTypeConfigurationData->execute($data);
             $collector->addData($data);
 

@@ -22,6 +22,13 @@
                     <ticket_id>IPET-1777</ticket_id>
                 </entry>
             </tag>
+            <tag version="1.0.12" date="2023-02-02">
+                <entry>
+                    <type>FEATURE</type>
+                    <overview>Added possibility to clean additional data</overview>
+                    <ticket_id>IPET-1837</ticket_id>
+                </entry>
+            </tag>
         </changelog>
     </module>
 </config>
