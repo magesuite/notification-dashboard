@@ -11,6 +11,7 @@
             <button name="save" class="MageSuite\NotificationDashboard\Block\Adminhtml\Collector\Edit\SaveButton"/>
             <button name="delete" class="MageSuite\NotificationDashboard\Block\Adminhtml\Collector\Edit\DeleteButton"/>
             <button name="back" class="MageSuite\NotificationDashboard\Block\Adminhtml\Collector\Edit\BackButton"/>
+            <button name="clean_additional_data" class="MageSuite\NotificationDashboard\Block\Adminhtml\Collector\Edit\CleanAdditionalDataButton"/>
         </buttons>
         <namespace>collector_form</namespace>
         <dataScope>data</dataScope>
@@ -213,7 +214,7 @@
                 </checkbox>
             </formElements>
         </field>
-        <dynamicRows name="users"  sortOrder="100">
+        <dynamicRows name="users" sortOrder="100">
             <settings>
                 <addButtonLabel translate="true">Add</addButtonLabel>
                 <componentType>dynamicRows</componentType>
@@ -295,7 +296,7 @@
                 </actionDelete>
             </container>
         </dynamicRows>
-        <field name="is_static" formElement="checkbox"  sortOrder="110">
+        <field name="is_static" formElement="checkbox" sortOrder="110">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="fit" xsi:type="boolean">false</item>
@@ -317,6 +318,21 @@
                     </settings>
                 </checkbox>
             </formElements>
+        </field>
+        <field name="additional_data" sortOrder="120" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">collector</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <disabled>1</disabled>
+                <label translate="true">Additional Data</label>
+                <tooltip>
+                    <description translate="true">This field can stores additional data used for advanced calculation.</description>
+                </tooltip>
+            </settings>
         </field>
     </fieldset>
     <fieldset name="not_paid_invoice" class="MageSuite\NotificationDashboard\Ui\Component\Form\FieldsetVisibility" sortOrder="10">
