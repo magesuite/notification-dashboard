@@ -25,7 +25,7 @@ class CleanAdditionalData extends \Magento\Backend\App\Action implements \Magent
 
         $id = (int)$this->getRequest()->getParam('id');
 
-        if ($id) {
+        if (!$id) {
             return $resultRedirect->setPath('*/*/');
         }
 
