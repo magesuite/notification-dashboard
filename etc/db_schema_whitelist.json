@@ -11,10 +11,15 @@
             "visible_on_dashboard": true,
             "limit_on_dashboard": true,
             "add_admin_notification": true,
-            "is_static": true
+            "is_static": true,
+            "additional_data": true
         },
         "constraint": {
             "PRIMARY": true
+        },
+        "index": {
+            "NOTIFICATION_DASHBOARD_COLLECTOR_IS_ENABLED": true,
+            "NOTIFICATION_DASHBOARD_COLLECTOR_TYPE": true
         }
     },
     "notification_dashboard_user": {
