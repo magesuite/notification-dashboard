@@ -18,7 +18,7 @@
     <type name="MageSuite\NotificationDashboard\Logger\Logger">
         <arguments>
             <argument name="name" xsi:type="string">notificationDashboardLogger</argument>
-            <argument name="handlers"  xsi:type="array">
+            <argument name="handlers" xsi:type="array">
                 <item name="system" xsi:type="object">MageSuite\NotificationDashboard\Logger\Handler</item>
             </argument>
         </arguments>

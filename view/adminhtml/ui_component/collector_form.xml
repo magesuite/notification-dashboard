@@ -319,7 +319,7 @@
                 </checkbox>
             </formElements>
         </field>
-        <field name="additional_data" sortOrder="120" formElement="input">
+        <field name="additional_data" formElement="input" sortOrder="120">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">collector</item>
@@ -335,7 +335,7 @@
             </settings>
         </field>
     </fieldset>
-    <fieldset name="not_paid_invoice" class="MageSuite\NotificationDashboard\Ui\Component\Form\FieldsetVisibility" sortOrder="10">
+    <fieldset name="not_paid_invoice" class="MageSuite\NotificationDashboard\Ui\Component\Form\FieldsetVisibility" sortOrder="20">
         <settings>
             <collapsible>false</collapsible>
             <label>Orders - Not paid invoice</label>
