@@ -35,7 +35,7 @@ class Processor
             $commandInstance->execute();
         } catch (\Magento\Framework\Exception\NoSuchEntityException $e) {
             $this->logger->critical(sprintf('Can`t found collector with id: %s', $collectorId));
-        } catch (\Magento\Framework\Exception\LocalizedException) { // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock
+        } catch (\Magento\Framework\Exception\LocalizedException $e) { // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock
         }
     }
 
