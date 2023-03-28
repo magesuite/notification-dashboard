@@ -9,8 +9,4 @@ foreach ($users->getItems() as $user) {
     $userRepository->delete($user);
 }
 
-$collectors = $collectorRepository->getList();
-
-foreach ($collectors->getItems() as $collector) {
-    $collectorRepository->delete($collector);
-}
+$collectorRepository->delete($collectorRepository->get('Test Collector'));
