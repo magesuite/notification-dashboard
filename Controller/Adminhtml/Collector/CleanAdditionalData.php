@@ -12,7 +12,7 @@ class CleanAdditionalData extends \Magento\Backend\App\Action implements \Magent
 
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \MageSuite\NotificationDashboard\Api\CollectorRepositoryInterface $collectorRepository,
+        \MageSuite\NotificationDashboard\Api\CollectorRepositoryInterface $collectorRepository
     ) {
         $this->collectorRepository = $collectorRepository;
 
