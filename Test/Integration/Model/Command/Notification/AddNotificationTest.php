@@ -33,7 +33,7 @@ class AddNotificationTest extends \PHPUnit\Framework\TestCase
     {
         $message = 'Dummy message';
         $title = 'Item name';
-        $collector = $this->getCollector();
+        $collector = $this->collectorRepository->get('Test Collector');
 
         $notifications = $this->notificationRepository->getList();
         $this->assertCount(0, $notifications->getItems());
@@ -62,13 +62,5 @@ class AddNotificationTest extends \PHPUnit\Framework\TestCase
         }
 
         $this->assertTrue($notificationWasAddedToInbox);
-    }
-
-    protected function getCollector()
-    {
-        $collectors = $this->collectorRepository->getList();
-        $items = $collectors->getItems();
-
-        return array_shift($items);
     }
 }
