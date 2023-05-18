@@ -42,7 +42,6 @@
     <fieldset name="general" class="MageSuite\NotificationDashboard\Ui\Component\Form\FieldsetVisibility" sortOrder="10">
         <settings>
             <label translate="true">General</label>
-            <notice>Please select the type first.</notice>
         </settings>
         <field name="id" formElement="input" sortOrder="10">
             <argument name="data" xsi:type="array">
