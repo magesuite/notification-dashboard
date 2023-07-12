@@ -9,9 +9,14 @@ class Product
 
     protected \Magento\Framework\DB\Adapter\AdapterInterface $connection;
 
-    public function __construct(\Magento\Framework\App\ResourceConnection $resourceConnection)
-    {
+    protected \Magento\Framework\EntityManager\MetadataPool $metadataPool;
+
+    public function __construct(
+        \Magento\Framework\App\ResourceConnection $resourceConnection,
+        \Magento\Framework\EntityManager\MetadataPool $metadataPool
+    ) {
         $this->connection = $resourceConnection->getConnection();
+        $this->metadataPool = $metadataPool;
     }
 
     public function getProductsWithoutImages($typeIds)
@@ -21,7 +26,7 @@ class Product
             ->from(['cpe' => $this->connection->getTableName('catalog_product_entity')], ['cpe.sku', 'cpe.entity_id', 'cpe.type_id'])
             ->joinLeft(
                 ['cpemgvte' => $this->connection->getTableName('catalog_product_entity_media_gallery_value_to_entity')],
-                'cpe.entity_id = cpemgvte.entity_id',
+                'cpe. ' . $this->getLinkField() . ' = cpemgvte.' . $this->getLinkField(),
                 []
             )
             ->joinLeft(
@@ -31,7 +36,7 @@ class Product
             )
             ->joinLeft(
                 ['cpei' => $this->connection->getTableName('catalog_product_entity_int')],
-                'cpe.entity_id = cpei.entity_id',
+                'cpe.' . $this->getLinkField() . ' = cpei.' . $this->getLinkField(),
                 []
             )
             ->where('cpei.attribute_id = ?', $this->getAttributeIdByCode(self::STATUS_ATTRIBUTE_CODE))
@@ -58,5 +63,10 @@ class Product
             ->where('attribute_code = ?', $attributeCode);
 
         return $this->connection->fetchOne($select);
+    }
+
+    protected function getLinkField(): string
+    {
+        return $this->metadataPool->getMetadata(\Magento\Catalog\Api\Data\ProductInterface::class)->getLinkField();
     }
 }
