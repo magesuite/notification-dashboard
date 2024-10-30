@@ -14,7 +14,7 @@ class AddRawDataToMessage
             return $notification->getMessage();
         }
 
-        $rawData = $this->prepareRawData($rawData);
+        $rawData = $this->prepareData($rawData);
         return sprintf(self::MESSAGE_WITH_DATA_FORMAT, $notification->getMessage(), var_export($rawData, true));
     }
 
