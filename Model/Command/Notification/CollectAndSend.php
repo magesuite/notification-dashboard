@@ -41,14 +41,7 @@ abstract class CollectAndSend implements CollectAndSendInterface
     public function setConfiguration(\MageSuite\NotificationDashboard\Model\Data\Collector $collector)
     {
         $configuration = $collector->getConfiguration();
-
-        if (empty($configuration)) {
-            throw new \MageSuite\NotificationDashboard\Exception\MissingCollectorConfiguration(
-                __('Missing configuration for %1 (ID: %2) collector', $collector->getName(), $collector->getId())
-            );
-        }
-
-        $this->configuration = $this->serializer->unserialize($configuration);
+        $this->configuration = $configuration ? $this->serializer->unserialize($configuration) : [];
     }
 
     /**
