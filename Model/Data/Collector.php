@@ -122,7 +122,7 @@ class Collector extends \Magento\Framework\Model\AbstractModel implements \MageS
      */
     public function setIsEnabled($isEnabled)
     {
-        $this->setData(self::IS_STATIC, $isEnabled);
+        $this->setData(self::IS_ENABLED, $isEnabled);
         return $this;
     }
 
