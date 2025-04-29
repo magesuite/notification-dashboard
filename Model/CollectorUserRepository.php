@@ -89,7 +89,7 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
     /**
      * @inheritDoc
      */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria = null)
+    public function getList(?\Magento\Framework\Api\SearchCriteriaInterface $criteria = null)
     {
         $collection = $this->collectionFactory->create();
 

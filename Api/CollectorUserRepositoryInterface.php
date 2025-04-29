@@ -32,7 +32,7 @@ interface CollectorUserRepositoryInterface
      * @param \Magento\Framework\Api\SearchCriteriaInterface|null $searchCriteria
      * @return \Magento\Framework\Api\SearchResultsInterface
      */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null);
+    public function getList(?\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = null);
 
     /**
      * @param \MageSuite\NotificationDashboard\Model\Data\CollectorUser $collectorUser
