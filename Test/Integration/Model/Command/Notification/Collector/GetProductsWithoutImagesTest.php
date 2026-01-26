@@ -54,20 +54,22 @@ class GetProductsWithoutImagesTest extends \PHPUnit\Framework\TestCase
         $notifications = $this->notificationRepository->getList()->getItems();
         $this->assertCount(0, $notifications);
 
-        $collector->setConfiguration(sprintf($configurationFormat, '["simple","bundle"]', ''));
+        $collector->setConfiguration(sprintf($configurationFormat, '["simple","bundle"]', 'simple-156'));
         $this->getProductsWithoutImages->setCollector($collector);
         $this->getProductsWithoutImages->setConfiguration($collector);
 
         $this->getProductsWithoutImages->execute();
 
         $notifications = $this->notificationRepository->getList()->getItems();
-        $this->assertCount(3, $notifications);
+        $this->assertCount(1, $notifications);
 
-        $notification = array_shift($notifications);
+        $notification = current($notifications);
 
         $this->assertEquals($collector->getId(), $notification->getCollectorId());
         $this->assertEquals('Missing product images', $notification->getTitle());
-        $this->assertEquals(sprintf('Product with sku %s (type simple) has no images', $productsWithoutImagesSkua[0]), $notification->getMessage());
+        $messages[] = sprintf('Product with sku %s (type simple) has no images', $productsWithoutImagesSkua[1]);
+        $messages[] = sprintf('Product with sku %s (type simple) has no images', $productsWithoutImagesSkua[2]);
+        $this->assertEquals(implode("<br>", $messages), $notification->getMessage());
         $this->assertEquals(\MageSuite\NotificationDashboard\Model\Source\Severity::SEVERITY_MAJOR, $notification->getSeverity());
     }
 }

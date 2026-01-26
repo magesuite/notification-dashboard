@@ -4,22 +4,19 @@ namespace MageSuite\NotificationDashboard\Model\ResourceModel;
 
 class Product
 {
-    const CATALOG_PRODUCT_ENTITY_TYPE_ID = 4;
-    const STATUS_ATTRIBUTE_CODE = 'status';
+    public const int CATALOG_PRODUCT_ENTITY_TYPE_ID = 4;
+    public const string STATUS_ATTRIBUTE_CODE = 'status';
 
     protected \Magento\Framework\DB\Adapter\AdapterInterface $connection;
 
-    protected \Magento\Framework\EntityManager\MetadataPool $metadataPool;
-
     public function __construct(
         \Magento\Framework\App\ResourceConnection $resourceConnection,
-        \Magento\Framework\EntityManager\MetadataPool $metadataPool
+        protected \Magento\Framework\EntityManager\MetadataPool $metadataPool
     ) {
         $this->connection = $resourceConnection->getConnection();
-        $this->metadataPool = $metadataPool;
     }
 
-    public function getProductsWithoutImages($typeIds)
+    public function getProductsWithoutImages(array $collectorConfiguration): array
     {
         $select = $this->connection
             ->select()
@@ -47,8 +44,14 @@ class Product
             ->order('cpe.type_id', \Magento\Framework\Api\SortOrder::SORT_ASC)
             ->order('cpe.sku', \Magento\Framework\Api\SortOrder::SORT_ASC);
 
-        if (!empty($typeIds)) {
+        $typeIds = $configuration['type_ids'] ?? [];
+        if ($typeIds) {
             $select->where('cpe.type_id IN (?)', $typeIds);
+        }
+
+        $excludedSkus = array_map('trim', explode(',', $collectorConfiguration['excluded_skus'] ?? ''));
+        if ($excludedSkus) {
+            $select->where('cpe.sku NOT IN (?)', $excludedSkus);
         }
 
         return $this->connection->fetchAll($select);
