@@ -4,8 +4,8 @@ namespace MageSuite\NotificationDashboard\Model\ResourceModel;
 
 class Product
 {
-    public const int CATALOG_PRODUCT_ENTITY_TYPE_ID = 4;
-    public const string STATUS_ATTRIBUTE_CODE = 'status';
+    public const CATALOG_PRODUCT_ENTITY_TYPE_ID = 4;
+    public const STATUS_ATTRIBUTE_CODE = 'status';
 
     protected \Magento\Framework\DB\Adapter\AdapterInterface $connection;
 
