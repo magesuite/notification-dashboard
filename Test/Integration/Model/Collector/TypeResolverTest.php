@@ -1,16 +1,15 @@
-<?php
+<?php /** @noinspection ObjectManagerInspection */
 
 namespace MageSuite\NotificationDashboard\Test\Integration\Model\Collector;
 
 class TypeResolverTest extends \PHPUnit\Framework\TestCase
 {
-    protected ?\Magento\TestFramework\ObjectManager $objectManager;
-
+    protected ?\Magento\Framework\App\ObjectManager $objectManager;
     protected ?\Magento\Framework\DataObjectFactory $dataObjectFactory;
 
     protected function setUp(): void
     {
-        $this->objectManager = \Magento\TestFramework\ObjectManager::getInstance();
+        $this->objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $this->dataObjectFactory = $this->objectManager->get(\Magento\Framework\DataObjectFactory::class);
     }
 
@@ -37,9 +36,7 @@ class TypeResolverTest extends \PHPUnit\Framework\TestCase
         /** @var \MageSuite\NotificationDashboard\Model\Collector\TypeResolver $typeResolver */
         $typeResolver = $this->objectManager->create(
             \MageSuite\NotificationDashboard\Model\Collector\TypeResolver::class,
-            [
-                'collectorTypes' => $collectorTypes
-            ]
+            ['collectorTypes' => $collectorTypes]
         );
 
         $types = $typeResolver->getCollectorTypes();
