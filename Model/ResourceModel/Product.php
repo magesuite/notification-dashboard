@@ -44,12 +44,12 @@ class Product
             ->order('cpe.type_id', \Magento\Framework\Api\SortOrder::SORT_ASC)
             ->order('cpe.sku', \Magento\Framework\Api\SortOrder::SORT_ASC);
 
-        $typeIds = $configuration['type_ids'] ?? [];
+        $typeIds = $collectorConfiguration['type_ids'] ?? [];
         if ($typeIds) {
             $select->where('cpe.type_id IN (?)', $typeIds);
         }
 
-        $excludedSkus = array_map('trim', explode(',', $collectorConfiguration['excluded_skus'] ?? ''));
+        $excludedSkus = array_filter(array_map('trim', explode(',', $collectorConfiguration['excluded_skus'] ?? '')));
         if ($excludedSkus) {
             $select->where('cpe.sku NOT IN (?)', $excludedSkus);
         }
