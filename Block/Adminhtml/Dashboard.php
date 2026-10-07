@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\NotificationDashboard\Block\Adminhtml;
 
 class Dashboard extends \Magento\Backend\Block\Template
 {
-    const HEADER_NAME_FORMAT = '<h2 style="margin-bottom: 0px;"><a href="%s">%s</a></h2>';
+    protected const string HEADER_NAME_FORMAT = '<h2 style="margin-bottom: 0px;"><a href="%s">%s</a></h2>';
 
     protected \MageSuite\NotificationDashboard\Model\CollectorRepository $collectorRepository;
 
@@ -18,7 +20,7 @@ class Dashboard extends \Magento\Backend\Block\Template
         $this->collectorRepository = $collectorRepository;
     }
 
-    public function getNotificationGridHtml()
+    public function getNotificationGridHtml(): string
     {
         $gridHtml = [];
 
@@ -28,7 +30,7 @@ class Dashboard extends \Magento\Backend\Block\Template
             $gridHtml[] = sprintf(
                 self::HEADER_NAME_FORMAT,
                 $this->getUrl('*/notification/index', ['_query' => ['collector_id' => $collector->getId()]]),
-                $collector->getName()
+                $this->escapeHtml($collector->getName())
             );
 
             $gridHtml[] = $this
