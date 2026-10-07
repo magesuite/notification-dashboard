@@ -1,51 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace MageSuite\NotificationDashboard\Model;
 
-class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\CollectorUserRepositoryInterface
+class CollectorUserRepository extends \MageSuite\NotificationDashboard\Model\AbstractRepository implements \MageSuite\NotificationDashboard\Api\CollectorUserRepositoryInterface
 {
-    protected \MageSuite\NotificationDashboard\Model\ResourceModel\CollectorUser $resourceModel;
-
-    protected \MageSuite\NotificationDashboard\Model\Data\CollectorUserFactory $collectorUserFactory;
-
-    protected \MageSuite\NotificationDashboard\Model\ResourceModel\CollectorUser\CollectionFactory $collectionFactory;
-
-    protected \Magento\Framework\Api\SearchResultsInterfaceFactory $searchResultsFactory;
-
-    protected \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder;
-
-    protected \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor;
-
     protected array $collectorUsers = [];
 
     public function __construct(
         \MageSuite\NotificationDashboard\Model\ResourceModel\CollectorUser $resourceModel,
-        \MageSuite\NotificationDashboard\Model\Data\CollectorUserFactory $collectorUserFactory,
-        \MageSuite\NotificationDashboard\Model\ResourceModel\CollectorUser\CollectionFactory $collectionFactory,
+        protected \MageSuite\NotificationDashboard\Model\Data\CollectorUserFactory $collectorUserFactory,
+        protected \MageSuite\NotificationDashboard\Model\ResourceModel\CollectorUser\CollectionFactory $collectionFactory,
         \Magento\Framework\Api\SearchResultsInterfaceFactory $searchResultsFactory,
         \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
         \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor
     ) {
-        $this->resourceModel = $resourceModel;
-        $this->collectorUserFactory = $collectorUserFactory;
-        $this->collectionFactory = $collectionFactory;
-        $this->searchResultsFactory = $searchResultsFactory;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
-        $this->collectionProcessor = $collectionProcessor;
+        parent::__construct($resourceModel, $searchResultsFactory, $searchCriteriaBuilder, $collectionProcessor);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function save($collectorUser)
+    protected function createCollection(): \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
     {
-        try {
-            $this->resourceModel->save($collectorUser);
-        } catch (\Exception $exception) {
-            throw new \Magento\Framework\Exception\CouldNotSaveException(__($exception->getMessage()));
-        }
-
-        return $collectorUser;
+        return $this->collectionFactory->create();
     }
 
     /**
@@ -84,47 +60,5 @@ class CollectorUserRepository implements \MageSuite\NotificationDashboard\Api\Co
         }
 
         return $list->getItems();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getList(?\Magento\Framework\Api\SearchCriteriaInterface $criteria = null)
-    {
-        $collection = $this->collectionFactory->create();
-
-        if ($criteria === null) {
-            $criteria = $this->searchCriteriaBuilder->create();
-        } else {
-            $this->collectionProcessor->process($criteria, $collection);
-        }
-
-        $searchResults = $this->searchResultsFactory->create();
-        $searchResults->setSearchCriteria($criteria);
-        $searchResults->setItems($collection->getItems());
-        $searchResults->setTotalCount($collection->getSize());
-
-        return $searchResults;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function delete($collectorUser)
-    {
-        try {
-            $this->resourceModel->delete($collectorUser);
-        } catch (\Exception $exception) {
-            throw new \Magento\Framework\Exception\CouldNotDeleteException(__($exception->getMessage()));
-        }
-        return true;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function deleteById($id)
-    {
-        return $this->delete($this->getById($id));
     }
 }
